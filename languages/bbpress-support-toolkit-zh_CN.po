@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: bbPress Support Toolkit 4.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bbpress-support-toolkit\n"
 "POT-Creation-Date: 2024-01-01 12:00+0000\n"
-"PO-Revision-Date: 2025-07-23 19:42+0800\n"
+"PO-Revision-Date: 2025-07-23 20:11+0800\n"
 "Last-Translator: \n"
 "Language-Team: 简体中文\n"
 "Language: zh_CN\n"
@@ -502,7 +502,7 @@ msgstr "标记为未解决"
 
 #: includes/admin.php:1573
 msgid "Mark as Not Support Question"
-msgstr "标记为非支持问题"
+msgstr "标记为已转交"
 
 #: includes/admin.php:1565
 msgid "Mark as Resolved"
@@ -554,7 +554,7 @@ msgstr "我认领的话题"
 
 #: includes/core.php:1016
 msgid "New"
-msgstr "新"
+msgstr "新贴"
 
 #: includes/admin.php:288
 msgid "New Topic Days"
@@ -566,15 +566,15 @@ msgstr "未选择默认论坛"
 
 #: includes/admin.php:1527
 msgid "Not a Support Question"
-msgstr "非支持问题"
+msgstr "已转交"
 
 #: includes/admin.php:1149 includes/core.php:596
 msgid "Not a support question"
-msgstr "非支持问题"
+msgstr "已转交"
 
 #: includes/admin.php:1102 includes/core.php:549
 msgid "not a support question"
-msgstr "非支持问题"
+msgstr "已转交"
 
 #: includes/admin.php:1135 includes/admin.php:1517 includes/core.php:578
 msgid "Not Resolved"
@@ -586,7 +586,7 @@ msgstr "未解决"
 
 #: includes/core.php:1040
 msgid "Not Support Question"
-msgstr "非支持问题"
+msgstr "已转交"
 
 #: includes/core.php:482
 msgid "Notice:"
@@ -594,7 +594,7 @@ msgstr "注意："
 
 #: includes/admin.php:1287
 msgid "Number of days to consider a topic as 'new'"
-msgstr "将话题视为\"新\"的天数"
+msgstr "将话题视为\"新贴”的天数"
 
 #: includes/admin.php:1383
 msgid "Number of search results to display per page"
@@ -614,7 +614,7 @@ msgstr "开放时间："
 
 #: includes/core.php:1085
 msgid "Original Poster"
-msgstr "原发布者"
+msgstr "楼主"
 
 #: includes/widgets.php:41 includes/widgets.php:250
 msgid "Our forums are closed"
@@ -888,8 +888,8 @@ msgid ""
 "to provide additional background information. For technical support requests, please "
 "include the program and system versions you are using."
 msgstr ""
-"这是一个非技术问题或不支持的事项，已转交给业务团队处理或跟进。如果没有回应，您可以继续"
-"提供额外的背景信息。对于技术支持请求，请包含您正在使用的程序和系统版本。"
+"此为非技术问题或不受支持，已转交商务团队处理或跟进；若无回复您可以继续补充背景信息，技"
+"术支持请求请补充所用程序及系统版本。"
 
 #: includes/admin.php:1107
 msgid "This is the default status that will get displayed on all topics"
