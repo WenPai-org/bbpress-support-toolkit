@@ -1,16 +1,17 @@
 <?php
 /*
-Plugin Name: bbPress Support Toolkit
-Plugin URI: https://cyberforums.com/bbpress-support-toolkit
-Author: Cyberforums.com
-Author URI: https://cyberforums.com
-Description: Transform your bbPress forums into comprehensive support forums with status management, user ranking, and premium features
-Version: 1.1.0
-Requires at least: 5.0
-Tested up to: 6.8
-Requires PHP: 7.4
-Text Domain: bbpress-support-toolkit
-Domain Path: /languages
+ * Plugin Name: bbPress Support Toolkit
+ * Plugin URI: https://cyberforums.com/bbpress-support-toolkit
+ * Author: Cyberforums.com
+ * Author URI: https://cyberforums.com
+ * Description: Transform your bbPress forums into comprehensive support forums with status management, user ranking, and premium features
+ * Version: 1.1.0
+ * Requires at least: 5.0
+ * Tested up to: 6.8
+ * Requires PHP: 7.4
+ * Requires Plugins: bbpress
+ * Text Domain: bbpress-support-toolkit
+ * Domain Path: /languages
 */
 
 if (!defined("ABSPATH")) {
