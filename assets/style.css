@@ -49,6 +49,126 @@
     width: 100px;
 }
 
+/* bbPress Support Toolkit Admin Styles - Updated to match multisite-settings-sync.php */
+.card {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    max-width: unset;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.bbps-settings-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    border-bottom: 1px solid #c3c4c7;
+    margin-bottom: 20px;
+}
+
+.bbps-tab {
+    padding: 8px 16px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 14px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.bbps-tab.active {
+    border-bottom: 2px solid #007cba;
+    font-weight: 600;
+    background: #f0f0f1;
+}
+
+.bbps-tab:hover:not(.active) {
+    background: #f0f0f1;
+    border-bottom-color: #dcdcde;
+}
+
+.bbps-settings-content {
+    flex: 1;
+}
+
+.bbps-section {
+    padding: 0;
+}
+
+.bbps-section .card {
+    margin: 0;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    background: #fff;
+    padding: 20px;
+}
+
+.bbps-section .card h2 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e1e1e1;
+    color: #23282d;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.bbps-section .form-table {
+    margin-top: 20px;
+}
+
+.bbps-section .form-table th {
+    width: 200px;
+    padding: 15px 10px 15px 0;
+    vertical-align: top;
+}
+
+.bbps-section .form-table td {
+    padding: 15px 10px;
+    vertical-align: top;
+}
+
+.bbps-section .description {
+    color: #666;
+    font-style: italic;
+    margin-top: 5px;
+}
+
+
+.bbps-settings-content .submit .button-primary {
+    background: #2271b1;
+    border-color: #2271b1;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: none;
+    font-size: 14px;
+    line-height: 2.15384615;
+    min-height: 32px;
+    padding: 0 12px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.bbps-settings-content .submit .button-primary:hover {
+    background: #135e96;
+    border-color: #135e96;
+}
+
+/* Notice styles */
+.notice {
+    border-radius: 3px;
+}
+
+.notice-success {
+    background-color: #dff0d8;
+    border-left: 4px solid #46b450;
+}
+
+.notice-error {
+    background-color: #f2dede;
+    border-left: 4px solid #dc3232;
+}
+
 .clear {
     clear: both;
 }

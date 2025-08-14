@@ -15,6 +15,7 @@ function bbps_extend_forum_attributes_mb($forum_id)
     $checked1 = $support_forum ? "checked" : "";
     ?>
     <hr />
+    <?php wp_nonce_field('bbps_forum_attributes', 'bbps_forum_attributes_nonce'); ?>
 
     <p>
         <strong><?php esc_html_e(
@@ -42,6 +43,11 @@ add_action(
 
 function bbps_forum_attributes_mb_save($forum_id)
 {
+    // Verify nonce
+    if (!isset($_POST['bbps_forum_attributes_nonce']) || !wp_verify_nonce($_POST['bbps_forum_attributes_nonce'], 'bbps_forum_attributes')) {
+        return;
+    }
+
     if (!current_user_can("edit_forum", $forum_id)) {
         return;
     }
@@ -78,6 +84,8 @@ function bbps_add_admin_menu()
 }
 
 add_action("admin_init", "bbps_register_admin_settings");
+add_action("wp_ajax_bbps_save_settings", "bbps_ajax_save_settings");
+add_action("admin_enqueue_scripts", "bbps_enqueue_admin_scripts");
 
 function bbps_register_admin_settings()
 {
@@ -542,11 +550,11 @@ function bbps_admin_page()
     $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'user-ranking';
     ?>
     <div class="wrap">
-            <h1><?php echo esc_html(get_admin_page_title()); ?>
-                <span style="font-size: 13px; padding-left: 10px;"><?php printf(esc_html__('Version: %s', 'bbpress-support-toolkit'), esc_html(BBPS_VERSION)); ?></span>
-                <a href="https://sharecms.com/document/bbpress-support-toolkit" target="_blank" class="button button-secondary" style="margin-left: 10px;"><?php esc_html_e('Documentation', 'bbpress-support-toolkit'); ?></a>
-                <a href="https://meta.cyberforums.com/tag/bbpress" target="_blank" class="button button-secondary"><?php esc_html_e('Support', 'bbpress-support-toolkit'); ?></a>
-            </h1>
+        <h1><?php echo esc_html(get_admin_page_title()); ?>
+            <span style="font-size: 13px; padding-left: 10px;"><?php printf(esc_html__('Version: %s', 'bbpress-support-toolkit'), esc_html(BBPS_VERSION)); ?></span>
+            <a href="https://sharecms.com/document/bbpress-support-toolkit" target="_blank" class="button button-secondary" style="margin-left: 10px;"><?php esc_html_e('Documentation', 'bbpress-support-toolkit'); ?></a>
+            <a href="https://meta.cyberforums.com/tag/bbpress" target="_blank" class="button button-secondary"><?php esc_html_e('Support', 'bbpress-support-toolkit'); ?></a>
+        </h1>
         
         <?php if (bbps_is_default_forum_enabled()) : ?>
             <div class="notice notice-info">
@@ -568,76 +576,155 @@ function bbps_admin_page()
                 </p>
             </div>
         <?php endif; ?>
-
-        <h2 class="nav-tab-wrapper">
-            <a href="?page=bbpress-support-toolkit&tab=user-ranking" class="nav-tab <?php echo $active_tab == 'user-ranking' ? 'nav-tab-active' : ''; ?>">
-                <?php esc_html_e('User Ranking', 'bbpress-support-toolkit'); ?>
-            </a>
-            <a href="?page=bbpress-support-toolkit&tab=topic-status" class="nav-tab <?php echo $active_tab == 'topic-status' ? 'nav-tab-active' : ''; ?>">
-                <?php esc_html_e('Topic Status', 'bbpress-support-toolkit'); ?>
-            </a>
-            <a href="?page=bbpress-support-toolkit&tab=support-forum" class="nav-tab <?php echo $active_tab == 'support-forum' ? 'nav-tab-active' : ''; ?>">
+        <div class="card">
+        <div class="bbps-settings-tabs">
+            <button type="button" class="bbps-tab <?php echo $active_tab == 'support-forum' ? 'active' : ''; ?>" data-tab="support-forum">
                 <?php esc_html_e('Support Forum', 'bbpress-support-toolkit'); ?>
-            </a>
-            <a href="?page=bbpress-support-toolkit&tab=topic-labels" class="nav-tab <?php echo $active_tab == 'topic-labels' ? 'nav-tab-active' : ''; ?>">
+            </button>
+             <button type="button" class="bbps-tab <?php echo $active_tab == 'topic-status' ? 'active' : ''; ?>" data-tab="topic-status">
+                <?php esc_html_e('Topic Status', 'bbpress-support-toolkit'); ?>
+            </button>
+            <button type="button" class="bbps-tab <?php echo $active_tab == 'topic-labels' ? 'active' : ''; ?>" data-tab="topic-labels">
                 <?php esc_html_e('Topic Labels', 'bbpress-support-toolkit'); ?>
-            </a>
-            <a href="?page=bbpress-support-toolkit&tab=search-settings" class="nav-tab <?php echo $active_tab == 'search-settings' ? 'nav-tab-active' : ''; ?>">
-                <?php esc_html_e('Search Settings', 'bbpress-support-toolkit'); ?>
-            </a>
-            <a href="?page=bbpress-support-toolkit&tab=private-replies" class="nav-tab <?php echo $active_tab == 'private-replies' ? 'nav-tab-active' : ''; ?>">
-                <?php esc_html_e('Private Replies', 'bbpress-support-toolkit'); ?>
-            </a>
-            <a href="?page=bbpress-support-toolkit&tab=seo-settings" class="nav-tab <?php echo $active_tab == 'seo-settings' ? 'nav-tab-active' : ''; ?>">
+            </button>
+            <button type="button" class="bbps-tab <?php echo $active_tab == 'seo-settings' ? 'active' : ''; ?>" data-tab="seo-settings">
                 <?php esc_html_e('SEO Settings', 'bbpress-support-toolkit'); ?>
-            </a>
-            <a href="?page=bbpress-support-toolkit&tab=forum-enhancements" class="nav-tab <?php echo $active_tab == 'forum-enhancements' ? 'nav-tab-active' : ''; ?>">
+            </button>
+            <button type="button" class="bbps-tab <?php echo $active_tab == 'search-settings' ? 'active' : ''; ?>" data-tab="search-settings">
+                <?php esc_html_e('Search Settings', 'bbpress-support-toolkit'); ?>
+            </button>
+            <button type="button" class="bbps-tab <?php echo $active_tab == 'private-replies' ? 'active' : ''; ?>" data-tab="private-replies">
+                <?php esc_html_e('Private Replies', 'bbpress-support-toolkit'); ?>
+            </button>
+            <button type="button" class="bbps-tab <?php echo $active_tab == 'user-ranking' ? 'active' : ''; ?>" data-tab="user-ranking">
+                <?php esc_html_e('User Ranking', 'bbpress-support-toolkit'); ?>
+            </button>
+            <button type="button" class="bbps-tab <?php echo $active_tab == 'forum-enhancements' ? 'active' : ''; ?>" data-tab="forum-enhancements">
                 <?php esc_html_e('Forum Enhancements', 'bbpress-support-toolkit'); ?>
-            </a>
-        </h2>
+            </button>
+        </div>
 
-        <form action="options.php" method="post">
-            <?php settings_fields("bbpress-support-toolkit"); ?>
-            
-            <div class="tab-content">
-                <?php if ($active_tab == 'user-ranking') : ?>
-                    <div id="user-ranking" class="tab-pane active">
-                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-user-ranking"); ?>
-                    </div>
-                <?php elseif ($active_tab == 'topic-status') : ?>
-                    <div id="topic-status" class="tab-pane active">
-                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-topic-status"); ?>
-                    </div>
-                <?php elseif ($active_tab == 'support-forum') : ?>
-                    <div id="support-forum" class="tab-pane active">
+        <div class="bbps-settings-content">
+            <form action="options.php" method="post">
+                <?php settings_fields("bbpress-support-toolkit"); ?>
+ 
+                 <div id="bbps-support-forum-section" class="bbps-section" data-section="support-forum" style="<?php echo $active_tab === 'support-forum' ? '' : 'display: none;'; ?>">
                         <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-support-forum"); ?>
-                    </div>
-                <?php elseif ($active_tab == 'topic-labels') : ?>
-                    <div id="topic-labels" class="tab-pane active">
+                </div>
+               
+                <div id="bbps-topic-status-section" class="bbps-section" data-section="topic-status" style="<?php echo $active_tab === 'topic-status' ? '' : 'display: none;'; ?>">
+                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-topic-status"); ?>
+                </div>
+                                
+                <div id="bbps-topic-labels-section" class="bbps-section" data-section="topic-labels" style="<?php echo $active_tab === 'topic-labels' ? '' : 'display: none;'; ?>">
                         <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-topic-labels"); ?>
-                    </div>
-                <?php elseif ($active_tab == 'search-settings') : ?>
-                    <div id="search-settings" class="tab-pane active">
-                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-search-settings"); ?>
-                    </div>
-                <?php elseif ($active_tab == 'private-replies') : ?>
-                    <div id="private-replies" class="tab-pane active">
-                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-private-replies"); ?>
-                    </div>
-                <?php elseif ($active_tab == 'seo-settings') : ?>
-                    <div id="seo-settings" class="tab-pane active">
-                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-seo-settings"); ?>
-                    </div>
-                <?php elseif ($active_tab == 'forum-enhancements') : ?>
-                    <div id="forum-enhancements" class="tab-pane active">
-                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-forum-enhancements"); ?>
-                    </div>
-                <?php endif; ?>
-            </div>
+                </div>
 
-            <?php submit_button(); ?>
-        </form>
+                <div id="bbps-seo-settings-section" class="bbps-section" data-section="seo-settings" style="<?php echo $active_tab === 'seo-settings' ? '' : 'display: none;'; ?>">
+                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-seo-settings"); ?>
+                </div>
+                                
+                <div id="bbps-search-settings-section" class="bbps-section" data-section="search-settings" style="<?php echo $active_tab === 'search-settings' ? '' : 'display: none;'; ?>">
+                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-search-settings"); ?>
+                </div>
+                
+                <div id="bbps-private-replies-section" class="bbps-section" data-section="private-replies" style="<?php echo $active_tab === 'private-replies' ? '' : 'display: none;'; ?>">
+                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-private-replies"); ?>
+                </div>
+               
+                <div id="bbps-user-ranking-section" class="bbps-section" data-section="user-ranking" style="<?php echo $active_tab === 'user-ranking' ? '' : 'display: none;'; ?>">
+                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-user-ranking"); ?>
+                </div>
+                 
+                <div id="bbps-forum-enhancements-section" class="bbps-section" data-section="forum-enhancements" style="<?php echo $active_tab === 'forum-enhancements' ? '' : 'display: none;'; ?>">
+                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-forum-enhancements"); ?>
+                </div>
+
+                <div id="bbps-save-status" class="notice" style="display: none; margin-top: 10px;"></div>
+                <p class="submit">
+                    <button type="button" id="bbps-save-settings" class="button button-primary"><?php esc_html_e('Save Settings', 'bbpress-support-toolkit'); ?></button>
+                    <span class="spinner" id="bbps-spinner" style="float: none; margin-left: 10px;"></span>
+                </p>
+            </form>
+        </div>
     </div>
+   </div>
+    <script type="text/javascript">
+    jQuery(document).ready(function($) {
+        var currentTab = '<?php echo esc_js($active_tab); ?>';
+        
+        $('.bbps-tab').on('click', function() {
+            $('.bbps-tab').removeClass('active');
+            $(this).addClass('active');
+            var tab = $(this).data('tab');
+            currentTab = tab;
+            $('.bbps-section').hide();
+            $('.bbps-section[data-section="' + tab + '"]').show();
+            
+            // Update URL without page reload
+            var url = new URL(window.location);
+            url.searchParams.set('tab', tab);
+            window.history.pushState({}, '', url);
+        });
+        
+        // Ajax保存功能
+        $('#bbps-save-settings').on('click', function() {
+            var $button = $(this);
+            var $spinner = $('#bbps-spinner');
+            var $status = $('#bbps-save-status');
+            var formData = $('form').serialize();
+            
+            $button.prop('disabled', true);
+            $spinner.addClass('is-active');
+            $status.hide();
+            
+            $.ajax({
+                url: bbps_ajax.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'bbps_save_settings',
+                    form_data: formData,
+                    _ajax_nonce: bbps_ajax.nonce
+                },
+                success: function(response) {
+                    if (response.success) {
+                        $status
+                            .removeClass('notice-error')
+                            .addClass('notice-success')
+                            .html('<p>' + response.data.message + '</p>')
+                            .show()
+                            .delay(3000)
+                            .fadeOut();
+                    } else {
+                        $status
+                            .removeClass('notice-success')
+                            .addClass('notice-error')
+                            .html('<p>' + (response.data || bbps_ajax.error_text) + '</p>')
+                            .show();
+                    }
+                },
+                error: function() {
+                    $status
+                        .removeClass('notice-success')
+                        .addClass('notice-error')
+                        .html('<p>' + bbps_ajax.error_text + '</p>')
+                        .show();
+                },
+                complete: function() {
+                    $button.prop('disabled', false);
+                    $spinner.removeClass('is-active');
+                }
+            });
+        });
+        
+        // 页面加载时确保正确的标签页显示
+        if (currentTab) {
+            $('.bbps-section').hide();
+            $('.bbps-section[data-section="' + currentTab + '"]').show();
+            $('.bbps-tab[data-tab="' + currentTab + '"]').addClass('active');
+        }
+    });
+    </script>
     <?php
 }
 
@@ -1650,4 +1737,79 @@ function bbps_bulk_action_admin_notice()
             $count
         );
     }
+}
+
+// Ajax处理函数
+function bbps_ajax_save_settings() {
+    // 验证nonce
+    if (!isset($_POST['_ajax_nonce']) || !wp_verify_nonce($_POST['_ajax_nonce'], 'bbps_settings_nonce')) {
+        wp_send_json_error(__('Invalid security token. Please refresh the page and try again.', 'bbpress-support-toolkit'));
+    }
+
+    // 检查权限
+    if (!current_user_can('manage_options')) {
+        wp_send_json_error(__('You do not have permission to perform this action.', 'bbpress-support-toolkit'));
+    }
+
+    // 获取表单数据
+    $form_data = isset($_POST['form_data']) ? $_POST['form_data'] : array();
+    
+    if (empty($form_data)) {
+        wp_send_json_error(__('No settings data provided.', 'bbpress-support-toolkit'));
+    }
+
+    // 解析表单数据
+    parse_str($form_data, $parsed_data);
+    
+    // 保存设置
+    $saved_count = 0;
+    
+    // 获取所有已注册的设置
+    global $wp_settings_fields;
+    $settings_to_save = array();
+    
+    if (isset($wp_settings_fields['bbpress-support-toolkit'])) {
+        foreach ($wp_settings_fields['bbpress-support-toolkit'] as $section => $fields) {
+            foreach ($fields as $field_id => $field) {
+                if (strpos($field_id, 'bbps_') === 0) {
+                    $settings_to_save[] = $field_id;
+                }
+            }
+        }
+    }
+    
+    foreach ($settings_to_save as $setting_name) {
+        $value = isset($parsed_data[$setting_name]) ? $parsed_data[$setting_name] : '';
+        
+        // 基本验证
+        if (strpos($setting_name, '_count') !== false || strpos($setting_name, '_enable') !== false) {
+            $value = intval($value);
+        } else {
+            $value = sanitize_text_field($value);
+        }
+        
+        update_option($setting_name, $value);
+        $saved_count++;
+    }
+
+    wp_send_json_success(array(
+        'message' => __('Settings saved successfully!', 'bbpress-support-toolkit'),
+        'saved_count' => $saved_count
+    ));
+}
+
+// 加载管理脚本
+function bbps_enqueue_admin_scripts($hook) {
+    if ($hook !== 'settings_page_bbpress-support-toolkit') {
+        return;
+    }
+    
+    wp_enqueue_script('jquery');
+    wp_localize_script('jquery', 'bbps_ajax', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('bbps_settings_nonce'),
+        'saving_text' => __('Saving...', 'bbpress-support-toolkit'),
+        'saved_text' => __('Settings saved successfully!', 'bbpress-support-toolkit'),
+        'error_text' => __('Error saving settings. Please try again.', 'bbpress-support-toolkit')
+    ));
 }

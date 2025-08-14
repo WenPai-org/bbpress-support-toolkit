@@ -5,7 +5,7 @@
  * Author: Cyberforums.com
  * Author URI: https://cyberforums.com
  * Description: Transform your bbPress forums into comprehensive support forums with status management, user ranking, and premium features
- * Version: 1.1.0
+ * Version: 1.2.0
  * Requires at least: 5.0
  * Tested up to: 6.8
  * Requires PHP: 7.4
@@ -39,7 +39,7 @@ final class BBPress_Support_Toolkit
 
     private function define_constants()
     {
-        define("BBPS_VERSION", "1.1.0");
+        define("BBPS_VERSION", "1.2.0");
         define("BBPS_PLUGIN_FILE", __FILE__);
         define("BBPS_PLUGIN_PATH", plugin_dir_path(__FILE__));
         define("BBPS_PLUGIN_URL", plugin_dir_url(__FILE__));
@@ -54,6 +54,7 @@ final class BBPress_Support_Toolkit
         register_uninstall_hook(__FILE__, ["BBPress_Support_Toolkit", "uninstall"]);
         add_action("plugins_loaded", [$this, "load_textdomain"]);
         add_action("wp_enqueue_scripts", [$this, "enqueue_styles"]);
+        add_action("admin_enqueue_scripts", [$this, "enqueue_admin_scripts"]);
         add_action("widgets_init", [$this, "register_widgets"]);
     }
 
@@ -200,6 +201,22 @@ final class BBPress_Support_Toolkit
     {
         wp_enqueue_style(
             "bbps-style",
+            BBPS_ASSETS_URL . "style.css",
+            [],
+            BBPS_VERSION
+        );
+    }
+
+    public function enqueue_admin_scripts($hook)
+    {
+        // Only load on our plugin's admin page
+        if ($hook !== 'settings_page_bbpress-support-toolkit') {
+            return;
+        }
+        
+        wp_enqueue_script('jquery');
+        wp_enqueue_style(
+            "bbps-admin-style",
             BBPS_ASSETS_URL . "style.css",
             [],
             BBPS_VERSION
