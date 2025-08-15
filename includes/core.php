@@ -542,13 +542,13 @@ function bbps_get_topic_status($topic_id)
 
     switch ($switch) {
         case 1:
-            return __("not resolved", "bbpress-support-toolkit");
+            return __("Not Resolved", "bbpress-support-toolkit");
         case 2:
-            return __("resolved", "bbpress-support-toolkit");
+            return __("Resolved", "bbpress-support-toolkit");
         case 3:
-            return __("not a support question", "bbpress-support-toolkit");
+            return __("Not a Support Question", "bbpress-support-toolkit");
         default:
-            return __("not resolved", "bbpress-support-toolkit");
+            return __("Not Resolved", "bbpress-support-toolkit");
     }
 }
 
@@ -1255,4 +1255,160 @@ function bbps_modify_search_form($form)
         }
     </script>';
     return $form;
+}
+
+// ========================================
+// Additional Features Integration
+// ========================================
+
+// 1. Disable User Page Feature
+function bbps_is_disable_user_page_enabled()
+{
+    return get_option('bbps_disable_user_page', 0);
+}
+
+if (bbps_is_disable_user_page_enabled()) {
+    add_filter('bbp_show_user_profile', '__return_false');
+}
+
+// 2. Remove Avatars Feature
+function bbps_is_remove_avatars_enabled()
+{
+    return get_option('bbps_remove_avatars', 0);
+}
+
+if (bbps_is_remove_avatars_enabled()) {
+    // Remove from replies and topics
+    function bbps_return_empty(){
+        return '';
+    }
+    add_filter('bbp_get_topic_author_avatar', 'bbps_return_empty');
+    add_filter('bbp_get_reply_author_avatar', 'bbps_return_empty');
+
+    // Remove from a few weird places like freshness
+    function bbps_remove_avatar_section($author_links, $r, $args){
+        foreach ($author_links as $link) {
+            if (strpos($link, 'bbp-author-avatar') !== false){
+                $author_links = array_diff($author_links, array($link));
+                break;
+            }
+        }
+        return $author_links;
+    }
+    add_filter('bbp_get_author_links', 'bbps_remove_avatar_section', 10 , 3);
+    
+    function bbps_reply_padding_fix(){
+        echo '<style>.bbp-reply-author { padding-top: 12px; }</style>';
+    }
+    add_action('bbp_template_before_replies_loop', 'bbps_reply_padding_fix');
+
+    // Remove from user profile page
+    function bbps_return_1(){
+        return 1;
+    }
+    add_filter('bbp_single_user_details_avatar_size', 'bbps_return_1');
+    
+    function bbps_hide_profile_avatar(){
+        echo '<style>#bbp-user-avatar { display: none; }</style>';
+    }
+    add_action('bbp_template_before_user_details', 'bbps_hide_profile_avatar');
+}
+
+// 3. Redirect Single Replies Feature
+function bbps_is_redirect_single_replies_enabled()
+{
+    return get_option('bbps_redirect_single_replies', 0);
+}
+
+if (bbps_is_redirect_single_replies_enabled()) {
+    class BBPS_Single_Reply_Redirect {
+        public function __construct() {
+            add_action( 'bbp_template_redirect', array( $this, 'template_redirect' ) );
+        }
+
+        public function template_redirect() {
+            if( bbp_is_single_reply() && ! bbp_is_reply_edit() ) {
+                wp_redirect( bbp_get_reply_url() ); exit;
+            }
+        }
+    }
+    new BBPS_Single_Reply_Redirect();
+}
+
+// 4. Custom Reply Notifications Feature
+function bbps_is_custom_notifications_enabled()
+{
+    return get_option('bbps_custom_notifications', 0);
+}
+
+if (bbps_is_custom_notifications_enabled()) {
+    class BBPS_Topic_Reply_Notifications {
+        function __construct() {
+            add_filter( 'bbp_forum_subscription_mail_message', array( __CLASS__, 'topic_message' ), 10, 3 );
+            add_filter( 'bbp_forum_subscription_mail_title',   array( __CLASS__, 'topic_title'   ), 10, 3 );
+            add_filter( 'bbp_subscription_mail_message',       array( __CLASS__, 'reply_message' ), 10, 3 );
+            add_filter( 'bbp_subscription_mail_title',         array( __CLASS__, 'reply_title'   ), 10, 3 );
+        }
+
+        public static function topic_message( $message, $topic_id, $forum_id ) {
+            $topic_content  = strip_tags( bbp_get_topic_content( $topic_id ) );
+            $topic_url      = bbp_get_topic_permalink( $topic_id );
+            $topic_author   = bbp_get_topic_author_display_name( $topic_id );
+            $forum_name     = bbp_get_forum_title( $forum_id );
+
+            $custom_message = get_option( 'bbps_topic_notice_body' );
+            $message = $custom_message ? $custom_message : $message;
+
+            $message = str_replace( '{author}',  $topic_author,  $message );
+            $message = str_replace( '{content}', $topic_content, $message );
+            $message = str_replace( '{url}',     $topic_url,     $message );
+            $message = str_replace( '{forum_name}', $forum_name, $message );
+
+            return $message;
+        }
+
+        public static function topic_title( $title, $topic_id, $forum_id ) {
+            $subject = get_option( 'bbps_topic_notice_title' );
+
+            if ( ! is_string( $subject ) && strlen( $subject ) == 0 ) {
+                return $title;
+            }
+
+            $search = '{title}';
+            $replace = strip_tags( bbp_get_topic_title( $topic_id ) );
+            $title = str_replace( $search, $replace, $subject );
+
+            return $title;
+        }
+
+        public static function reply_message( $message, $reply_id, $topic_id ) {
+            $reply_content  = strip_tags( bbp_get_reply_content( $reply_id ) );
+            $reply_url      = bbp_get_reply_url( $reply_id );
+            $reply_author   = bbp_get_reply_author_display_name( $reply_id );
+
+            $custom_message = get_option( 'bbps_reply_notice_body' );
+            $message = $custom_message ? $custom_message : $message;
+
+            $message = str_replace( '{author}',  $reply_author,  $message );
+            $message = str_replace( '{content}', $reply_content, $message );
+            $message = str_replace( '{url}',     $reply_url,     $message );
+
+            return $message;
+        }
+
+        public static function reply_title( $title, $reply_id, $topic_id ) {
+            $subject = get_option( 'bbps_reply_notice_title' );
+
+            if ( ! is_string( $subject ) && strlen( $subject ) == 0 ) {
+                return $title;
+            }
+
+            $search = '{title}';
+            $replace = strip_tags( bbp_get_topic_title( $topic_id ) );
+            $title = str_replace( $search, $replace, $subject );
+
+            return $title;
+        }
+    }
+    new BBPS_Topic_Reply_Notifications();
 }

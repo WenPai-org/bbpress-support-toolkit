@@ -4,9 +4,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bbPress Support Toolkit 4.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bbpress-support-toolkit\n"
-"POT-Creation-Date: 2024-01-01 12:00+0000\n"
-"PO-Revision-Date: 2025-07-23 20:11+0800\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/bbpress-support-"
+"toolkit\n"
+"POT-Creation-Date: 2025-08-15 15:36+0800\n"
+"PO-Revision-Date: 2025-08-15 16:12+0800\n"
 "Last-Translator: \n"
 "Language-Team: 简体中文\n"
 "Language: zh_CN\n"
@@ -16,158 +17,269 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 3.6\n"
 
-#: includes/admin.php:1446 includes/admin.php:1480
+#: includes/admin.php:1772 includes/admin.php:1806
 msgid "<code>%BLOGNAME%</code> will be replaced with the name of your blog."
 msgstr "<code>%BLOGNAME%</code> 将被替换为您的博客名称。"
 
-#: includes/admin.php:1450 includes/admin.php:1484
+#: includes/admin.php:1776 includes/admin.php:1810
 msgid "<code>%BLOGURL%</code> will be replaced with the url of your blog."
 msgstr "<code>%BLOGURL%</code> 将被替换为您的博客网址。"
 
-#: includes/admin.php:1442
+#: includes/admin.php:1768
 msgid "<code>%PASSWORD%</code> will be replaced with the user's password."
 msgstr "<code>%PASSWORD%</code> 将被替换为用户的密码。"
 
-#: includes/admin.php:1438
+#: includes/admin.php:1764
 msgid "<code>%USERNAME%</code> will be replaced with a username."
 msgstr "<code>%USERNAME%</code> 将被替换为用户名。"
 
-#: includes/admin.php:946
+#: includes/enhanced-features.php:500
+#, php-format
+msgid "[%s] Content Reported"
+msgstr "[%s] 内容已举报"
+
+#: includes/enhanced-features.php:502
+#, php-format
+msgid ""
+"A user has reported content on your forum.\\n\\nPost ID: %d\\nReported by: "
+"%s\\nReason: %s\\n\\nPlease review this content."
+msgstr ""
+"用户在您的论坛上举报了内容。\\n\\n帖子ID：%d\\n举报者：%s\\n原因：%s\\n\\n请"
+"审核此内容。"
+
+#: includes/enhanced-features.php:115
+msgid "Add Admin Note"
+msgstr "添加管理员备注"
+
+#: includes/admin.php:1272
 msgid "Add canonical URLs to prevent duplicate content issues"
 msgstr "添加规范网址以防止重复内容问题"
 
-#: includes/admin.php:904
+#: includes/enhanced-features.php:302
+msgid "Add New Canned Reply"
+msgstr "添加新预设回复"
+
+#: includes/enhanced-features.php:301
+msgid "Add New Reply"
+msgstr "添加新回复"
+
+#: includes/admin.php:1230
 msgid "Add Open Graph meta tags for better social media sharing"
 msgstr "添加Open Graph元标签以改善社交媒体分享"
 
-#: includes/admin.php:932
+#: includes/admin.php:1258
 msgid "Add structured data markup for better search engine understanding"
 msgstr "添加结构化数据标记以便搜索引擎更好地理解"
 
-#: includes/admin.php:918
+#: includes/admin.php:1244
 msgid "Add Twitter Card meta tags for enhanced Twitter sharing"
 msgstr "添加Twitter Card元标签以增强Twitter分享"
 
-#: includes/admin.php:1031
+#: includes/admin.php:1357
 msgid ""
 "Additional enhancements and fixes for bbPress functionality to improve user "
 "experience and forum management."
 msgstr "对bbPress功能的额外增强和修复，以改善用户体验和论坛管理。"
 
-#: includes/admin.php:172
+# Additional Features
+#: includes/admin.php:408
+msgid "Additional Features"
+msgstr "附加功能"
+
+#: includes/admin.php:1985
+msgid "Additional features to enhance your bbPress forums."
+msgstr "增强您的 bbPress 论坛的附加功能。"
+
+#: includes/admin.php:196
 msgid "Admin"
 msgstr "管理员"
+
+#: includes/advanced-features.php:57
+msgid "Admin Note"
+msgstr "管理员备注"
+
+# 管理员功能
+#: includes/advanced-features.php:48
+msgid "Admin Note:"
+msgstr "管理员备注："
+
+#: includes/enhanced-features.php:89
+msgid "Admin Notes"
+msgstr "管理员备注"
 
 #: includes/widgets.php:620
 msgid "Administrators"
 msgstr "管理员"
 
-#: includes/admin.php:1261
+#: includes/admin.php:657 includes/admin.php:784
+msgid "Advanced Features"
+msgstr "高级功能"
+
+#: includes/admin.php:2136
 msgid ""
-"Allow administrators and forum moderators to assign topics to other administrators "
-"and forum moderators"
+"Advanced features to enhance your bbPress forums with additional "
+"functionality."
+msgstr "增强您的bbPress论坛功能的高级特性。"
+
+#: bbpress-support-toolkit.php:297
+msgid "AJAX error occurred"
+msgstr "AJAX 错误发生"
+
+#: includes/enhanced-features.php:267
+msgid "All topics marked as read"
+msgstr "所有话题已标记为已读"
+
+#: includes/admin.php:1587
+msgid ""
+"Allow administrators and forum moderators to assign topics to other "
+"administrators and forum moderators"
 msgstr "允许管理员和论坛版主将话题分配给其他管理员和论坛版主"
 
-#: includes/admin.php:711
+#: includes/admin.php:984
 msgid "Allow longer topic titles (increases the default character limit)"
 msgstr "允许更长的话题标题（增加默认字符限制）"
 
-#: includes/admin.php:1163
+#: includes/admin.php:1489
 msgid "Allow the admin to update the topic status (recommended)."
 msgstr "允许管理员更新话题状态（推荐）。"
 
-#: includes/admin.php:1233
+#: includes/admin.php:1559
 msgid ""
-"Allow the forum moderators and admin to claim a topic, this will mark the topic title "
-"with [claimed] but will only show to forum moderators and admin users"
+"Allow the forum moderators and admin to claim a topic, this will mark the "
+"topic title with [claimed] but will only show to forum moderators and admin "
+"users"
 msgstr ""
-"允许论坛版主和管理员认领话题，这将在话题标题前标记 [已认领]，但仅对论坛版主和管理员用"
-"户显示"
+"允许论坛版主和管理员认领话题，这将在话题标题前标记 [已认领]，但仅对论坛版主和"
+"管理员用户显示"
 
-#: includes/admin.php:1219
+#: includes/admin.php:1545
 msgid ""
-"Allow the forum moderators and admin to mark a topic as Urgent, this will mark the "
-"topic title with [urgent]."
+"Allow the forum moderators and admin to mark a topic as Urgent, this will "
+"mark the topic title with [urgent]."
 msgstr "允许论坛版主和管理员将话题标记为紧急，这将在话题标题前标记 [紧急]。"
 
-#: includes/admin.php:1205
+#: includes/admin.php:1531
 msgid "Allow the forum moderators and admin to move topics to other forums."
 msgstr "允许论坛版主和管理员将话题移动到其他论坛。"
 
-#: includes/admin.php:1191
+#: includes/admin.php:1517
 msgid "Allow the forum moderators to update the post status."
 msgstr "允许论坛版主更新帖子状态。"
 
-#: includes/admin.php:1177
+#: includes/admin.php:1503
 msgid "Allow the person who created the topic to update the status."
 msgstr "允许创建话题的人更新状态。"
 
-#: includes/admin.php:1397
+#: includes/admin.php:1723
 msgid "Allow users to mark their replies as private"
 msgstr "允许用户将回复标记为私有"
 
-#: includes/admin.php:1011
+#: includes/admin.php:1337
 msgid ""
-"Allow users to mark their replies as private, visible only to the topic author, "
-"moderators, and administrators."
+"Allow users to mark their replies as private, visible only to the topic "
+"author, moderators, and administrators."
 msgstr "允许用户将回复标记为私有，仅对话题作者、版主和管理员可见。"
 
-#: includes/admin.php:1371
+#: includes/admin.php:2168
 msgid ""
-"Also include blog posts in search results (forum topics will still be prioritized)"
+"Allows administrators and moderators to create and use pre-written reply "
+"templates."
+msgstr "允许管理员和版主创建和使用预写的回复模板。"
+
+#: includes/admin.php:2144
+msgid ""
+"Allows administrators to add private notes to topics and replies that are "
+"only visible to other administrators."
+msgstr "允许管理员为话题和回复添加仅对其他管理员可见的私有备注。"
+
+#: includes/admin.php:2160
+msgid ""
+"Allows users to mark topics as read/unread and track their reading progress."
+msgstr "允许用户将话题标记为已读/未读并跟踪阅读进度。"
+
+#: includes/admin.php:2152
+msgid "Allows users to preview their posts in real-time before submitting."
+msgstr "允许用户在提交前实时预览帖子。"
+
+#: includes/admin.php:2176
+msgid ""
+"Allows users to report inappropriate topics and replies to administrators."
+msgstr "允许用户向管理员举报不当话题和回复。"
+
+#: includes/admin.php:1697
+msgid ""
+"Also include blog posts in search results (forum topics will still be "
+"prioritized)"
 msgstr "在搜索结果中也包含博客文章（论坛话题仍将优先显示）"
 
-#: includes/admin.php:219
+#: includes/advanced-features.php:251
+msgid "An error occurred"
+msgstr "发生错误"
+
+#: includes/admin.php:243
 msgid "Assign topics"
 msgstr "分配话题"
 
-#: includes/admin.php:408
+#: includes/admin.php:523
 msgid "Auto Generate Meta Descriptions"
 msgstr "自动生成元描述"
 
-#: includes/admin.php:878
+#: includes/admin.php:1204
 msgid "Automatically generate meta descriptions from topic and reply content"
 msgstr "从话题和回复内容自动生成元描述"
 
-#: includes/admin.php:751
+#: includes/admin.php:1024
 msgid "Automatically pre-select a default forum when creating new topics"
 msgstr "创建新话题时自动预选择默认论坛"
 
-#: includes/admin.php:958
+#: includes/admin.php:1285
 msgid "Available placeholders:"
 msgstr "可用占位符："
 
-#: includes/admin.php:73
+#: includes/admin.php:772
+msgid "Basic Settings"
+msgstr "基本设置"
+
+#: includes/admin.php:91
 msgid "bbPress Support"
 msgstr "bbPress支持"
 
-#. Plugin Name of the plugin/theme
-#: includes/admin.php:72
+#. Name of the plugin
+#: includes/admin.php:90
 msgid "bbPress Support Toolkit"
 msgstr "bbPress支持套件"
 
-#: includes/admin.php:1247
+#: includes/admin.php:1573
 msgid ""
-"By selecting this option if a topic is claimed the claimed persons username will be "
-"displayed next to the topic title instead of the words [claimed], leaving this "
-"unchecked will default to [claimed]"
+"By selecting this option if a topic is claimed the claimed persons username "
+"will be displayed next to the topic title instead of the words [claimed], "
+"leaving this unchecked will default to [claimed]"
 msgstr ""
-"选择此选项后，如果话题被认领，认领者的用户名将显示在话题标题旁边，而不是显示 [已认领] "
-"字样，不选择此选项将默认显示 [已认领]"
+"选择此选项后，如果话题被认领，认领者的用户名将显示在话题标题旁边，而不是显示 "
+"[已认领] 字样，不选择此选项将默认显示 [已认领]"
 
-#: includes/widgets.php:173
+#: includes/enhanced-features.php:299 includes/enhanced-features.php:345
+#: includes/enhanced-features.php:346 includes/enhanced-features.php:368
+msgid "Canned Replies"
+msgstr "预设回复"
+
+#: includes/enhanced-features.php:300
+msgid "Canned Reply"
+msgstr "预设回复"
+
+#: includes/widgets.php:172
 msgid ""
-"Checking this box turns your widget into closed mode until you uncheck it - perfect "
-"if you are away on holiday and not maintaining your forums."
+"Checking this box turns your widget into closed mode until you uncheck it - "
+"perfect if you are away on holiday and not maintaining your forums."
 msgstr ""
-"选中此框将使您的小工具进入关闭模式，直到您取消选中 - 非常适合您外出度假且不维护论坛的"
-"情况。"
+"选中此框将使您的小工具进入关闭模式，直到您取消选中 - 非常适合您外出度假且不维"
+"护论坛的情况。"
 
-#: includes/admin.php:228
+#: includes/admin.php:252
 msgid "Claim topics"
 msgstr "认领话题"
 
-#: includes/admin.php:1540 includes/core.php:1068
+#: includes/admin.php:1867 includes/core.php:1068
 msgid "Claimed"
 msgstr "已认领"
 
@@ -195,83 +307,105 @@ msgstr "已关闭"
 msgid "Closed Text:"
 msgstr "关闭文本："
 
-#: includes/admin.php:1001
+#: includes/admin.php:1327
 msgid ""
-"Configure search functionality and user interface enhancements for your forum. Search "
-"will prioritize forum topics over blog posts."
-msgstr "为您的论坛配置搜索功能和用户界面增强。搜索将优先显示论坛话题而非博客文章。"
-
-#: includes/admin.php:1021
-msgid ""
-"Configure SEO settings to make your forum more search engine friendly. These settings "
-"will help improve your forum's visibility in search results."
+"Configure search functionality and user interface enhancements for your "
+"forum. Search will prioritize forum topics over blog posts."
 msgstr ""
-"配置SEO设置以使您的论坛更适合搜索引擎。这些设置将有助于提高您论坛在搜索结果中的可见"
-"性。"
+"为您的论坛配置搜索功能和用户界面增强。搜索将优先显示论坛话题而非博客文章。"
 
-#: includes/admin.php:991
+#: includes/admin.php:1347
 msgid ""
-"Configure topic labels that will be displayed on topics based on different conditions."
+"Configure SEO settings to make your forum more search engine friendly. These "
+"settings will help improve your forum's visibility in search results."
+msgstr ""
+"配置SEO设置以使您的论坛更适合搜索引擎。这些设置将有助于提高您论坛在搜索结果中"
+"的可见性。"
+
+#: includes/admin.php:1317
+msgid ""
+"Configure topic labels that will be displayed on topics based on different "
+"conditions."
 msgstr "配置基于不同条件在话题上显示的话题标签。"
 
-#: includes/admin.php:487
+#: bbpress-support-toolkit.php:304 includes/enhanced-features.php:510
+msgid "Content reported successfully"
+msgstr "内容举报成功"
+
+#: includes/advanced-features.php:318
+msgid "Content reported successfully."
+msgstr "内容举报成功。"
+
+#: includes/admin.php:602
 msgid "Custom Email From Address"
 msgstr "自定义邮件发送地址"
 
-#. Author of the plugin/theme
+#: includes/admin.php:2023
+msgid "Customize the email notifications sent to forum and topic subscribers."
+msgstr "自定义发送给论坛和话题订阅者的邮件通知。"
+
+#. Author of the plugin
 msgid "Cyberforums.com"
 msgstr "Cyberforums.com"
 
-#: includes/admin.php:532
+#: includes/admin.php:647
 msgid "Default Forum ID"
 msgstr "默认论坛ID"
 
-#: includes/admin.php:560
+#: includes/admin.php:758
 #, php-format
 msgid "Default forum is set to \"%s\" (ID: %d)"
 msgstr "默认论坛设置为 \"%s\" (ID: %d)"
 
-#: includes/admin.php:554
+#: includes/admin.php:752
 msgid "Default Forum Status:"
 msgstr "默认论坛状态："
 
-#: includes/admin.php:132
+#: includes/admin.php:156
 msgid "Default Status:"
 msgstr "默认状态："
 
-#: includes/admin.php:1357
+#: includes/admin.php:1992
+msgid "Disable bbPress user profile pages"
+msgstr "禁用 bbPress 用户资料页面"
+
+#: includes/admin.php:415
+msgid "Disable User Pages"
+msgstr "禁用用户页面"
+
+#: includes/admin.php:1683
 msgid "Display 'Original Poster' label for topic authors in replies"
 msgstr "在回复中为话题作者显示\"原发布者\"标签"
 
-#: includes/admin.php:1301
+#: includes/admin.php:1627
 msgid "Display a 'Closed' label on closed topics"
 msgstr "在已关闭话题上显示\"已关闭\"标签"
 
-#: includes/admin.php:1275
+#: includes/admin.php:1601
 msgid "Display a 'New' label on recent topics"
 msgstr "在最近话题上显示\"新\"标签"
 
-#: includes/admin.php:1315
+#: includes/admin.php:1641
 msgid "Display a 'Sticky' label on sticky topics"
 msgstr "在置顶话题上显示\"置顶\"标签"
 
-#: includes/widgets.php:388
+#: includes/widgets.php:387
 msgid "Display a count of resolved topics in your forum"
-msgstr "显示您论坛中已解决话题的数量"
+msgstr "在您的论坛中显示已解决话题的计数"
 
-#: includes/widgets.php:714
+#: includes/widgets.php:713
 msgid "Display a list of recently resolved topics in your forum"
-msgstr "显示您论坛中最近解决话题的列表"
+msgstr "在您的论坛中显示最近已解决的话题列表"
 
-#: includes/widgets.php:819
+#: includes/widgets.php:818
 msgid "Display a list of the users claimed topics"
 msgstr "显示用户已认领话题的列表"
 
-#: includes/widgets.php:578
+#: includes/widgets.php:577
 msgid "Display a list of urgent topics in your forum"
-msgstr "显示您论坛中紧急话题的列表"
+msgstr "在您的论坛中显示紧急话题列表"
 
-#: includes/widgets.php:950
+#: includes/widgets.php:949
 msgid "Display a registration form for your forum"
 msgstr "为您的论坛显示注册表单"
 
@@ -283,11 +417,11 @@ msgstr "显示论坛时间："
 msgid "Display Resolved Topic Count"
 msgstr "显示已解决话题数"
 
-#: includes/admin.php:145
+#: includes/admin.php:169
 msgid "Display Status:"
 msgstr "显示状态："
 
-#: includes/admin.php:1083
+#: includes/admin.php:1409
 msgid "Display the users rank title below their gravatar?"
 msgstr "在用户头像下方显示用户的等级头衔？"
 
@@ -295,109 +429,216 @@ msgstr "在用户头像下方显示用户的等级头衔？"
 msgid "Display Total Topic Count"
 msgstr "显示话题总数"
 
-#: includes/admin.php:237
+#: includes/admin.php:261
 msgid "Display Username:"
 msgstr "显示用户名："
 
-#: includes/admin.php:547
+#: includes/admin.php:745
 msgid "Documentation"
 msgstr "文档"
 
-#: includes/admin.php:1414
+#: includes/enhanced-features.php:303
+msgid "Edit Canned Reply"
+msgstr "编辑预设回复"
+
+#: includes/admin.php:1741
 msgid "Edit Others Posts (Editors)"
 msgstr "编辑他人帖子（编辑者）"
 
-#: includes/admin.php:697
+#: includes/admin.php:970
 msgid "Email address to use as sender for forum notification emails"
 msgstr "用作论坛通知邮件发送者的邮箱地址"
 
-#: includes/admin.php:259
+#: includes/admin.php:2039
+msgid ""
+"Email message sent to forum subscribers when a new topic is posted. "
+"Available tokens: {author}, {content}, {url}, {forum_name}"
+msgstr ""
+"发布新话题时发送给论坛订阅者的邮件消息。可用标记：{author}、{content}、"
+"{url}、{forum_name}"
+
+#: includes/admin.php:2055
+msgid ""
+"Email message sent to topic subscribers when a new reply is posted. "
+"Available tokens: {author}, {content}, {url}"
+msgstr ""
+"发布新回复时发送给话题订阅者的邮件消息。可用标记：{author}、{content}、{url}"
+
+#: includes/admin.php:283
 msgid "Email Notification Message:"
 msgstr "邮件通知消息："
 
-#: includes/admin.php:246
+#: includes/admin.php:270
 msgid "Email Notification Subject:"
 msgstr "邮件通知主题："
 
-#: includes/admin.php:981
+#: includes/admin.php:665
+msgid "Enable Admin Notes"
+msgstr "启用管理员备注"
+
+#: includes/admin.php:2143
+msgid "Enable admin notes for topics and replies"
+msgstr "为话题和回复启用管理员备注"
+
+#: includes/admin.php:1307
 msgid ""
-"Enable and configure the settings for support forums, these options will be displayed "
-"on each topic within your support forums"
+"Enable and configure the settings for support forums, these options will be "
+"displayed on each topic within your support forums"
 msgstr "启用并配置支持论坛设置，这些选项将在您的支持论坛内的每个话题上显示"
 
-#: includes/admin.php:971
+#: includes/admin.php:1297
 msgid ""
-"Enable and configure the settings for topic statuses these will be displayed on each "
-"topic"
+"Enable and configure the settings for topic statuses these will be displayed "
+"on each topic"
 msgstr "启用并配置话题状态设置，这些状态将在每个话题上显示"
 
-#: includes/admin.php:453
+#: includes/admin.php:695
+msgid "Enable Canned Replies"
+msgstr "启用预设回复"
+
+#: includes/admin.php:2167
+msgid "Enable canned replies"
+msgstr "启用预设回复"
+
+#: includes/admin.php:568
 msgid "Enable Canonical URLs"
 msgstr "启用规范网址"
 
-#: includes/admin.php:297
+#: includes/admin.php:321
 msgid "Enable Closed Topic Label"
 msgstr "启用已关闭话题标签"
 
-#: includes/admin.php:864
+#: includes/admin.php:1190
 msgid "Enable comprehensive SEO optimization for forum content"
 msgstr "为论坛内容启用全面的SEO优化"
 
-#: includes/admin.php:523
+#: includes/admin.php:2175
+msgid "Enable content reporting"
+msgstr "启用内容举报"
+
+#: includes/admin.php:2016
+msgid "Enable custom email notifications"
+msgstr "启用自定义邮件通知"
+
+#: includes/admin.php:442
+msgid "Enable Custom Notifications"
+msgstr "启用自定义通知"
+
+#: includes/admin.php:638
 msgid "Enable Default Forum Selection"
 msgstr "启用默认论坛选择"
 
-#: includes/admin.php:478
+#: includes/admin.php:593
 msgid "Enable Email From Fix"
 msgstr "启用邮件发送修复"
 
-#: includes/admin.php:331
+#: includes/admin.php:355
 msgid "Enable Forum Search Integration"
 msgstr "启用论坛搜索集成"
 
-#: includes/admin.php:279
+#: includes/admin.php:675
+msgid "Enable Live Preview"
+msgstr "启用实时预览"
+
+#: includes/admin.php:2151
+msgid "Enable live preview for topics and replies"
+msgstr "为话题和回复启用实时预览"
+
+#: includes/admin.php:685
+msgid "Enable Mark as Read"
+msgstr "启用标记为已读"
+
+#: includes/admin.php:2159
+msgid "Enable mark as read functionality"
+msgstr "启用标记为已读功能"
+
+#: includes/admin.php:303
 msgid "Enable New Topic Label"
 msgstr "启用新话题标签"
 
-#: includes/admin.php:426
+#: includes/admin.php:541
 msgid "Enable Open Graph Tags"
 msgstr "启用Open Graph标签"
 
-#: includes/admin.php:315
+#: includes/admin.php:339
 msgid "Enable Original Poster Label"
 msgstr "启用原发布者标签"
 
-#: includes/admin.php:374
+#: includes/admin.php:398
 msgid "Enable Private Replies"
 msgstr "启用私有回复"
 
-#: includes/admin.php:444
+#: includes/admin.php:705
+msgid "Enable Report Content"
+msgstr "启用举报内容"
+
+#: includes/admin.php:559
 msgid "Enable Schema Markup"
 msgstr "启用Schema标记"
 
-#: includes/admin.php:340
+#: includes/admin.php:364
 msgid "Enable Search URL Rewrite"
 msgstr "启用搜索网址重写"
 
-#: includes/admin.php:399
+#: includes/admin.php:514
 msgid "Enable SEO Optimization"
 msgstr "启用SEO优化"
 
-#: includes/admin.php:306
+#: includes/admin.php:330
 msgid "Enable Sticky Topic Label"
 msgstr "启用置顶话题标签"
 
-#: includes/admin.php:496
+#: includes/admin.php:611
 msgid "Enable Title Length Fix"
 msgstr "启用标题长度修复"
 
-#: includes/admin.php:435
+#: includes/admin.php:715
+msgid "Enable Topic Lock"
+msgstr "启用话题锁定"
+
+#: includes/admin.php:2183
+msgid "Enable topic lock notifications"
+msgstr "启用话题锁定通知"
+
+#: includes/admin.php:550
 msgid "Enable Twitter Cards"
 msgstr "启用Twitter卡片"
 
-#: includes/core.php:406
+#: includes/enhanced-features.php:117
+msgid "Enter admin note..."
+msgstr "输入管理员备注..."
+
+#: bbpress-support-toolkit.php:295
+msgid "Error locking topic"
+msgstr "锁定话题时出错"
+
+#: bbpress-support-toolkit.php:286
+msgid "Error occurred"
+msgstr "发生错误"
+
+#: bbpress-support-toolkit.php:305
+msgid "Error reporting content"
+msgstr "举报内容时出错"
+
+#: bbpress-support-toolkit.php:300
+msgid "Error saving note"
+msgstr "保存备注时出错"
+
+#: includes/admin.php:2129
+msgid "Error saving settings. Please try again."
+msgstr "保存设置时出错，请重试。"
+
+#: bbpress-support-toolkit.php:296
+msgid "Error unlocking topic"
+msgstr "解锁话题时出错"
+
+#: includes/core.php:405
 msgid "Error: Unable to move topic."
 msgstr "错误：无法移动话题。"
+
+#: includes/enhanced-features.php:152
+msgid "Failed to save note"
+msgstr "保存备注失败"
 
 #: includes/widgets.php:329
 msgid "Forum Closed"
@@ -411,15 +652,19 @@ msgstr "论坛周末关闭？"
 msgid "Forum Closed:"
 msgstr "论坛关闭："
 
-#: includes/admin.php:471 includes/admin.php:595
+#: includes/admin.php:586
 msgid "Forum Enhancements"
 msgstr "论坛增强"
 
-#: includes/admin.php:186
+#: includes/admin.php:778
+msgid "Forum Features"
+msgstr "论坛功能"
+
+#: includes/admin.php:210
 msgid "Forum Moderator"
 msgstr "论坛版主"
 
-#: includes/admin.php:960
+#: includes/admin.php:1287
 msgid "Forum name"
 msgstr "论坛名称"
 
@@ -435,100 +680,134 @@ msgstr "论坛注册"
 msgid "Forum Support Hours"
 msgstr "论坛支持时间"
 
-#: includes/admin.php:462
+#: includes/admin.php:577
 msgid "Forum Title Format"
 msgstr "论坛标题格式"
 
-#: includes/admin.php:787
-msgid "Forum to be pre-selected when users create new topics (categories are excluded)"
+#: includes/admin.php:1060
+msgid ""
+"Forum to be pre-selected when users create new topics (categories are "
+"excluded)"
 msgstr "用户创建新话题时预选择的论坛（分类除外）"
 
-#: includes/admin.php:1503
+#: includes/admin.php:1830
 msgid "Forum Type"
 msgstr "论坛类型"
 
-#: includes/widgets.php:856
+#: includes/widgets.php:855
 msgid "How many claimed topics would you like to display?"
 msgstr "您想要显示多少个已认领的话题？"
 
-#: includes/widgets.php:751
+#: includes/widgets.php:750
 msgid "How many resolved topics would you like to display?"
-msgstr "您想要显示多少个已解决的话题？"
+msgstr "您想显示多少个已解决的话题？"
 
-#. Author URI of the plugin/theme
+#. Author URI of the plugin
 msgid "https://cyberforums.com"
 msgstr "https://cyberforums.com"
 
-#. Plugin URI of the plugin/theme
+#. URI of the plugin
 msgid "https://cyberforums.com/bbpress-support-toolkit"
 msgstr "https://cyberforums.com/bbpress-support-toolkit"
 
-#: includes/widgets.php:145
+#: includes/widgets.php:144
 #, php-format
 msgid ""
-"If you would like to display a clock showing the time in your current time zone head "
-"over %s and make one, copy the code in the text area above and we will do the rest!"
+"If you would like to display a clock showing the time in your current time "
+"zone head over %s and make one, copy the code in the text area above and we "
+"will do the rest!"
 msgstr ""
-"如果您想显示当前时区时间的时钟，请前往 %s 制作一个，复制上方文本区域中的代码，我们会处"
-"理其余部分！"
+"如果您想显示当前时区时间的时钟，请前往 %s 制作一个，复制上方文本区域中的代"
+"码，我们会处理其余部分！"
 
-#: includes/admin.php:349
+#: includes/admin.php:373
 msgid "Include Blog Posts in Search"
 msgstr "在搜索中包含博客文章"
 
-#: includes/admin.php:1329
+#: includes/admin.php:1655
 msgid "Include forum topics in WordPress search results"
 msgstr "在WordPress搜索结果中包含论坛话题"
 
-#: includes/admin.php:1047
+#: includes/admin.php:2062
+msgid "Invalid security token. Please refresh the page and try again."
+msgstr "无效的安全令牌。请刷新页面后重试。"
+
+#: includes/admin.php:1373
 msgid "is granted when a user has at least"
 msgstr "当用户至少拥有"
 
-#: includes/widgets.php:1003
+#: includes/widgets.php:1002
 msgid "Join our forum community!"
 msgstr "加入我们的论坛社区！"
+
+# JavaScript 字符串
+#: bbpress-support-toolkit.php:285
+msgid "Loading..."
+msgstr "加载中..."
+
+#: bbpress-support-toolkit.php:292 includes/enhanced-features.php:404
+#: includes/enhanced-features.php:430
+msgid "Lock Topic"
+msgstr "锁定话题"
 
 #: includes/core.php:1217
 msgid "Make this reply private"
 msgstr "将此回复设为私有"
 
-#: includes/admin.php:1413
+#: includes/admin.php:1740
 msgid "Manage Options (Administrators)"
 msgstr "管理选项（管理员）"
 
-#: includes/admin.php:1569
+#: bbpress-support-toolkit.php:289
+msgid "Mark all topics as read?"
+msgstr "将所有话题标记为已读？"
+
+#: includes/admin.php:1895
 msgid "Mark as Not Resolved"
 msgstr "标记为未解决"
 
-#: includes/admin.php:1573
+#: includes/admin.php:1899
 msgid "Mark as Not Support Question"
 msgstr "标记为已转交"
 
-#: includes/admin.php:1565
+#: bbpress-support-toolkit.php:283 includes/advanced-features.php:188
+#: includes/advanced-features.php:227 includes/advanced-features.php:249
+#: includes/enhanced-features.php:196 includes/enhanced-features.php:237
+msgid "Mark as Read"
+msgstr "标记为已读"
+
+# 话题状态操作
+#: includes/admin.php:1891
 msgid "Mark as Resolved"
 msgstr "标记为已解决"
 
-#: includes/admin.php:1577
+#: bbpress-support-toolkit.php:284 includes/advanced-features.php:188
+#: includes/advanced-features.php:227 includes/advanced-features.php:250
+#: includes/enhanced-features.php:196 includes/enhanced-features.php:233
+msgid "Mark as Unread"
+msgstr "标记为未读"
+
+#: includes/admin.php:1903
 msgid "Mark as Urgent"
 msgstr "标记为紧急"
 
-#: includes/admin.php:723
+#: includes/admin.php:996
 msgid "Maximum characters allowed in topic titles"
 msgstr "话题标题允许的最大字符数"
 
-#: includes/admin.php:890
+#: includes/admin.php:1216
 msgid "Maximum length for auto-generated meta descriptions (characters)"
 msgstr "自动生成元描述的最大长度（字符）"
 
-#: includes/admin.php:505
+#: includes/admin.php:620
 msgid "Maximum Title Length"
 msgstr "最大标题长度"
 
-#: includes/admin.php:417
+#: includes/admin.php:532
 msgid "Meta Description Length"
 msgstr "元描述长度"
 
-#: includes/admin.php:1412
+#: includes/admin.php:1739
 msgid "Moderate (Forum Moderators)"
 msgstr "审核（论坛版主）"
 
@@ -536,51 +815,68 @@ msgstr "审核（论坛版主）"
 msgid "Moderators"
 msgstr "版主"
 
-#: includes/core.php:447
+#: includes/core.php:446
 msgid "Move"
 msgstr "移动"
 
-#: includes/core.php:442
+#: includes/core.php:441
 msgid "Move topic to:"
 msgstr "移动话题至："
 
-#: includes/admin.php:210
+#: includes/admin.php:234
 msgid "Move topics"
 msgstr "移动话题"
 
 #: includes/widgets.php:834
 msgid "My Claimed Topics"
-msgstr "我认领的话题"
+msgstr "我的已认领话题"
 
 #: includes/core.php:1016
 msgid "New"
 msgstr "新贴"
 
-#: includes/admin.php:288
+#: includes/enhanced-features.php:304
+msgid "New Canned Reply"
+msgstr "新预设回复"
+
+#: includes/admin.php:312
 msgid "New Topic Days"
 msgstr "新话题天数"
 
-#: includes/admin.php:565
+#: includes/enhanced-features.php:307
+msgid "No canned replies found"
+msgstr "未找到预设回复"
+
+#: includes/enhanced-features.php:308
+msgid "No canned replies found in trash"
+msgstr "回收站中未找到预设回复"
+
+#: includes/admin.php:763
 msgid "No default forum selected"
 msgstr "未选择默认论坛"
 
-#: includes/admin.php:1527
+#: includes/admin.php:2074
+msgid "No settings data provided."
+msgstr "未提供设置数据。"
+
+#: includes/admin.php:1854 includes/core.php:549
 msgid "Not a Support Question"
 msgstr "已转交"
 
-#: includes/admin.php:1149 includes/core.php:596
+#: includes/admin.php:1475 includes/core.php:595
 msgid "Not a support question"
 msgstr "已转交"
 
-#: includes/admin.php:1102 includes/core.php:549
+#: includes/admin.php:1428
 msgid "not a support question"
 msgstr "已转交"
 
-#: includes/admin.php:1135 includes/admin.php:1517 includes/core.php:578
+#: includes/admin.php:1461 includes/admin.php:1844 includes/core.php:545
+#: includes/core.php:551 includes/core.php:577
 msgid "Not Resolved"
 msgstr "未解决"
 
-#: includes/admin.php:1094 includes/core.php:545 includes/core.php:551
+#: includes/admin.php:1420
 msgid "not resolved"
 msgstr "未解决"
 
@@ -588,15 +884,27 @@ msgstr "未解决"
 msgid "Not Support Question"
 msgstr "已转交"
 
+#: includes/enhanced-features.php:135
+msgid "Note content is required"
+msgstr "备注内容为必填项"
+
+#: bbpress-support-toolkit.php:299 includes/enhanced-features.php:150
+msgid "Note saved successfully"
+msgstr "备注保存成功"
+
 #: includes/core.php:482
 msgid "Notice:"
 msgstr "注意："
 
-#: includes/admin.php:1287
+#: includes/admin.php:453
+msgid "Notification Settings"
+msgstr "通知设置"
+
+#: includes/admin.php:1613
 msgid "Number of days to consider a topic as 'new'"
 msgstr "将话题视为\"新贴”的天数"
 
-#: includes/admin.php:1383
+#: includes/admin.php:1709
 msgid "Number of search results to display per page"
 msgstr "每页显示的搜索结果数量"
 
@@ -616,97 +924,135 @@ msgstr "开放时间："
 msgid "Original Poster"
 msgstr "楼主"
 
-#: includes/widgets.php:41 includes/widgets.php:250
+#: includes/widgets.php:40 includes/widgets.php:250
 msgid "Our forums are closed"
 msgstr "我们的论坛已关闭"
 
-#: includes/widgets.php:37 includes/widgets.php:253
+#: includes/widgets.php:36 includes/widgets.php:253
 msgid "Our forums are open"
 msgstr "我们的论坛开放中"
 
-#: includes/widgets.php:311 includes/widgets.php:336
+#: includes/widgets.php:310 includes/widgets.php:335
 #, php-format
 msgid "Our office hours are: %s - %s"
 msgstr "我们的办公时间：%s - %s"
 
-#: includes/admin.php:681
+#: includes/admin.php:954
 msgid "Override default WordPress email sender address for forum notifications"
 msgstr "覆盖WordPress默认邮件发送地址用于论坛通知"
 
-#: includes/widgets.php:106
+#: includes/advanced-features.php:400 includes/enhanced-features.php:128
+#: includes/enhanced-features.php:414
+msgid "Permission denied"
+msgstr "权限被拒绝"
+
+#: includes/widgets.php:105
 #, php-format
 msgid ""
-"Place your closing image into the following directory: %s then enter the name of your "
-"closing image here, please be careful to spell it correctly and add the file "
-"extension. eg closeimage.png"
+"Place your closing image into the following directory: %s then enter the "
+"name of your closing image here, please be careful to spell it correctly and "
+"add the file extension. eg closeimage.png"
 msgstr ""
-"将您的关闭图片放置在以下目录中：%s 然后在此处输入您的关闭图片名称，请注意拼写正确并添"
-"加文件扩展名。例如 closeimage.png"
+"将您的关闭图片放置在以下目录中：%s 然后在此处输入您的关闭图片名称，请注意拼写"
+"正确并添加文件扩展名。例如 closeimage.png"
 
-#: includes/widgets.php:91
+#: includes/widgets.php:90
 #, php-format
 msgid ""
-"Place your opening image into the following directory: %s then enter the name of your "
-"opening image here, please be careful to spell it correctly and add the file "
-"extension. eg openimage.png"
+"Place your opening image into the following directory: %s then enter the "
+"name of your opening image here, please be careful to spell it correctly and "
+"add the file extension. eg openimage.png"
 msgstr ""
-"将您的开放图片放置在以下目录中：%s 然后在此处输入您的开放图片名称，请注意拼写正确并添"
-"加文件扩展名。例如 openimage.png"
+"将您的开放图片放置在以下目录中：%s 然后在此处输入您的开放图片名称，请注意拼写"
+"正确并添加文件扩展名。例如 openimage.png"
 
-#: includes/widgets.php:78
+#: bbpress-support-toolkit.php:298
+msgid "Please enter a note"
+msgstr "请输入备注"
+
+#: bbpress-support-toolkit.php:288
+msgid "Please enter some content to preview."
+msgstr "请输入一些内容进行预览。"
+
+#: includes/widgets.php:77
 msgid ""
-"Please enter the closing time for your support forum in 24 hour format eg: 5pm 17:00"
+"Please enter the closing time for your support forum in 24 hour format eg: "
+"5pm 17:00"
 msgstr "请输入您的支持论坛的关闭时间（24小时格式），例如：下午5点 17:00"
 
-#: includes/widgets.php:66
+#: includes/widgets.php:65
 msgid ""
-"Please enter the opening time for your support forum in 24 hour format eg: 9am 09:00"
+"Please enter the opening time for your support forum in 24 hour format eg: "
+"9am 09:00"
 msgstr "请输入您的支持论坛的开放时间（24小时格式），例如：上午9点 09:00"
 
-#: includes/widgets.php:904
+#: bbpress-support-toolkit.php:302
+msgid "Please enter the reason for reporting this content:"
+msgstr "请输入举报此内容的原因："
+
+#: includes/advanced-features.php:203 includes/advanced-features.php:301
+#: includes/enhanced-features.php:224 includes/enhanced-features.php:251
+#: includes/enhanced-features.php:479
+msgid "Please log in"
+msgstr "请登录"
+
+#: includes/widgets.php:903
 msgid "Please log in to view your claimed topics."
-msgstr "请登录查看您认领的话题。"
+msgstr "请登录以查看您的已认领话题。"
 
 #: includes/core.php:902
 #, php-format
 msgid "Post count: %s"
 msgstr "发帖数：%s"
 
-#: includes/admin.php:1057
+#: bbpress-support-toolkit.php:301
+msgid "Post ID not found"
+msgstr "未找到帖子 ID"
+
+#: includes/admin.php:1384
 msgid "posts"
 msgstr "个帖子时获得"
 
-#: includes/admin.php:1053
+#: includes/admin.php:1380
 msgid "posts but not more than"
 msgstr "个帖子但不超过"
 
-#: includes/admin.php:1553
+#: includes/admin.php:1880
 msgid "Premium"
 msgstr "高级"
 
-#: includes/admin.php:21
+#: includes/admin.php:33
 msgid "Premium Forum:"
 msgstr "高级论坛："
 
-#: includes/admin.php:367 includes/admin.php:589
+#: includes/advanced-features.php:119 includes/enhanced-features.php:159
+msgid "Preview"
+msgstr "预览"
+
+#: bbpress-support-toolkit.php:287
+msgid "Preview error"
+msgstr "预览错误"
+
+#: includes/admin.php:391
 msgid "Private Replies"
 msgstr "私有回复"
 
 #: includes/core.php:1219
-msgid "Private replies are only visible to you, the topic author, and moderators."
+msgid ""
+"Private replies are only visible to you, the topic author, and moderators."
 msgstr "私有回复仅对您、话题作者和版主可见。"
 
-#: includes/admin.php:1401
+#: includes/admin.php:1727
 msgid ""
-"Private replies are visible only to the topic author, reply author, and users with "
-"the specified capability."
+"Private replies are visible only to the topic author, reply author, and "
+"users with the specified capability."
 msgstr "私有回复仅对话题作者、回复作者和具有指定权限的用户可见。"
 
-#: includes/admin.php:383
+#: includes/admin.php:498
 msgid "Private Replies Capability"
 msgstr "私有回复权限"
 
-#: includes/admin.php:1042
+#: includes/admin.php:1369
 msgid "Rank Title"
 msgstr "等级头衔"
 
@@ -714,32 +1060,72 @@ msgstr "等级头衔"
 msgid "Recently Resolved"
 msgstr "最近已解决"
 
+#: includes/admin.php:433
+msgid "Redirect Single Replies to Topics"
+msgstr "将单个回复重定向到话题"
+
+#: includes/admin.php:2008
+msgid "Redirect single reply pages to parent topics"
+msgstr "将单个回复页面重定向到父话题"
+
 #: includes/widgets.php:1008
 msgid "Register Now"
 msgstr "立即注册"
 
-#: includes/admin.php:737
+#: includes/admin.php:1010
 msgid "Remove the topic tags input field from the new topic form"
 msgstr "从新话题表单中移除话题标签输入字段"
 
-#: includes/admin.php:514
+#: includes/admin.php:629
 msgid "Remove Topic Tags Input"
 msgstr "移除话题标签输入"
 
-#: includes/admin.php:1581
+#: includes/admin.php:1907
 msgid "Remove Urgent Status"
 msgstr "移除紧急状态"
+
+#: includes/admin.php:424
+msgid "Remove User Avatars"
+msgstr "移除用户头像"
+
+#: includes/admin.php:2000
+msgid "Remove user avatars from bbPress"
+msgstr "从 bbPress 中移除用户头像"
 
 #: includes/core.php:1173
 msgid "Reply in:"
 msgstr "回复在："
 
-#: includes/admin.php:1121 includes/admin.php:1522 includes/core.php:587
-#: includes/core.php:1034
+#: includes/admin.php:487
+msgid "Reply Notification Body"
+msgstr "回复通知正文"
+
+#: includes/admin.php:478
+msgid "Reply Notification Subject"
+msgstr "回复通知主题"
+
+#: includes/advanced-features.php:295 includes/enhanced-features.php:458
+#: includes/enhanced-features.php:471
+msgid "Report"
+msgstr "举报"
+
+#: bbpress-support-toolkit.php:303 includes/advanced-features.php:279
+msgid "Reported"
+msgstr "已举报"
+
+#: includes/advanced-features.php:284
+#, php-format
+msgid "Reported <span class=\"count\">(%s)</span>"
+msgid_plural "Reported <span class=\"count\">(%s)</span>"
+msgstr[0] "已举报 <span class=\"count\">(%s)</span>"
+
+# 核心状态翻译
+#: includes/admin.php:1447 includes/admin.php:1849 includes/core.php:547
+#: includes/core.php:586 includes/core.php:1034
 msgid "Resolved"
 msgstr "已解决"
 
-#: includes/admin.php:1098 includes/core.php:547
+#: includes/admin.php:1424
 msgid "resolved"
 msgstr "已解决"
 
@@ -751,57 +1137,87 @@ msgstr "已解决话题计数"
 msgid "Resolved Topics"
 msgstr "已解决话题"
 
-#: includes/admin.php:1343
+#: includes/admin.php:1669
 msgid "Rewrite search URLs to use /search/ format"
 msgstr "重写搜索网址以使用 /search/ 格式"
 
-#: includes/admin.php:358
+#: includes/enhanced-features.php:119
+msgid "Save Note"
+msgstr "保存备注"
+
+#: includes/admin.php:826
+msgid "Save Settings"
+msgstr "保存设置"
+
+#: includes/admin.php:2127
+msgid "Saving..."
+msgstr "保存中..."
+
+#: includes/admin.php:781
+msgid "Search & SEO"
+msgstr "搜索和SEO"
+
+#: includes/enhanced-features.php:306
+msgid "Search Canned Replies"
+msgstr "搜索预设回复"
+
+#: includes/admin.php:382
 msgid "Search Results Count"
 msgstr "搜索结果数量"
 
-#: includes/admin.php:324 includes/admin.php:586
+#: includes/admin.php:348
 msgid "Search Settings"
 msgstr "搜索设置"
 
-#: includes/admin.php:769 includes/core.php:516
+# 错误消息
+#: includes/advanced-features.php:150
+msgid "Security check failed"
+msgstr "安全检查失败"
+
+#: includes/admin.php:1043 includes/core.php:516
 msgid "Select a forum"
 msgstr "选择论坛"
 
-#: includes/widgets.php:610
+#: includes/widgets.php:609
 msgid "Select the user types who will be able to see the list of urgent topics"
 msgstr "选择能够看到紧急话题列表的用户类型"
 
-#: includes/widgets.php:186
-msgid "Select this if you would like to display your forum hours in the widget."
+#: includes/widgets.php:185
+msgid ""
+"Select this if you would like to display your forum hours in the widget."
 msgstr "如果您想在小工具中显示您的论坛时间，请选择此项。"
 
-#: includes/widgets.php:160
+#: includes/widgets.php:159
 msgid "Select this if your forum is closed on the weekends"
 msgstr "如果您的论坛在周末关闭，请选择此项"
 
-#: includes/admin.php:392 includes/admin.php:592
+#: includes/admin.php:507
 msgid "SEO Settings"
 msgstr "SEO设置"
 
-#: includes/widgets.php:14
+#: includes/widgets.php:13
 msgid ""
-"Set your support times for your support forum - these will be displayed to your "
-"posters"
+"Set your support times for your support forum - these will be displayed to "
+"your posters"
 msgstr "为您的支持论坛设置支持时间 - 这些将显示给发帖者"
 
-#: includes/admin.php:106
+#: includes/admin.php:2112 includes/admin.php:2128
+msgid "Settings saved successfully!"
+msgstr "设置保存成功！"
+
+#: includes/admin.php:130
 msgid "Show forum post count"
 msgstr "显示论坛发帖数"
 
-#: includes/admin.php:115
+#: includes/admin.php:139
 msgid "Show Rank"
 msgstr "显示等级"
 
-#: includes/admin.php:1069
+#: includes/admin.php:1395
 msgid "Show the users post count below their gravatar?"
 msgstr "在用户头像下方显示用户的发帖数？"
 
-#: includes/admin.php:961
+#: includes/admin.php:1288
 msgid "Site name"
 msgstr "网站名称"
 
@@ -809,7 +1225,7 @@ msgstr "网站名称"
 msgid "Site Users"
 msgstr "网站用户"
 
-#: includes/admin.php:1557
+#: includes/admin.php:1884
 msgid "Standard"
 msgstr "标准"
 
@@ -817,27 +1233,24 @@ msgstr "标准"
 msgid "Sticky"
 msgstr "置顶"
 
-#: includes/admin.php:548 includes/admin.php:1550
+#: includes/admin.php:746 includes/admin.php:1877
 msgid "Support"
 msgstr "支持"
 
-#: includes/admin.php:580
-msgid "Support Forum"
-msgstr "支持论坛"
-
-#: includes/admin.php:194
+#: includes/admin.php:218
 msgid "Support Forum Settings"
 msgstr "支持论坛设置"
 
-#: includes/admin.php:29
+#: includes/admin.php:41
 msgid "Support Forum:"
 msgstr "支持论坛："
 
+# 小工具翻译
 #: includes/widgets.php:29
 msgid "Support Hours"
 msgstr "支持时间"
 
-#: includes/admin.php:1502
+#: includes/admin.php:1829
 msgid "Support Status"
 msgstr "支持状态"
 
@@ -857,7 +1270,7 @@ msgstr "已解决总数前文本："
 msgid "Text Before Total:"
 msgstr "总数前文本："
 
-#: bbpress-support-toolkit.php:153 includes/admin.php:1461
+#: bbpress-support-toolkit.php:167 includes/admin.php:1787
 msgid ""
 "Thanks for signing up to our blog.\n"
 "\n"
@@ -881,109 +1294,174 @@ msgstr ""
 "\n"
 "%BLOGNAME% 团队"
 
-#: includes/core.php:484
+#: includes/admin.php:2047
 msgid ""
-"This is a non-technical issue or unsupported matter, and has been transferred to the "
-"business team for processing or follow-up. If there is no response, you can continue "
-"to provide additional background information. For technical support requests, please "
-"include the program and system versions you are using."
-msgstr ""
-"此为非技术问题或不受支持，已转交商务团队处理或跟进；若无回复您可以继续补充背景信息，技"
-"术支持请求请补充所用程序及系统版本。"
+"The subject of the reply notification email. Use {title} for the topic title."
+msgstr "回复通知邮件的主题。使用 {title} 表示话题标题。"
 
-#: includes/admin.php:1107
+#: includes/admin.php:2031
+msgid ""
+"The subject of the topic notification email. Use {title} for the topic title."
+msgstr "话题通知邮件的主题。使用 {title} 表示话题标题。"
+
+#: includes/core.php:483
+msgid ""
+"This is a non-technical issue or unsupported matter, and has been "
+"transferred to the business team for processing or follow-up. If there is no "
+"response, you can continue to provide additional background information. For "
+"technical support requests, please include the program and system versions "
+"you are using."
+msgstr ""
+"此为非技术问题或不受支持，已转交商务团队处理或跟进；若无回复您可以继续补充背"
+"景信息，技术支持请求请补充所用程序及系统版本。"
+
+#: includes/admin.php:1433
 msgid "This is the default status that will get displayed on all topics"
 msgstr "这是将在所有话题上显示的默认状态"
+
+#: includes/advanced-features.php:70
+msgid "This note is only visible to administrators and moderators."
+msgstr "此备注仅对管理员和版主可见。"
 
 #: includes/core.php:1201
 msgid "This reply is private."
 msgstr "此回复为私有。"
 
-#: includes/core.php:422
+#: includes/core.php:421
 #, php-format
 msgid "This topic is: %s"
 msgstr "此话题状态：%s"
 
-#: includes/widgets.php:132
+#: includes/admin.php:2017
 msgid ""
-"This will be displayed to your users when the forums are closed. This text has a "
-"class of \"forum_text\" if you would like to style it differently"
-msgstr ""
-"当论坛关闭时，这将显示给您的用户。如果您想要不同的样式，此文本具有 \"forum_text\" 类"
+"This will allow you to customize the email notifications sent to forum "
+"subscribers."
+msgstr "这将允许您自定义发送给论坛订阅者的邮件通知。"
 
-#: includes/widgets.php:120
+#: includes/widgets.php:131
 msgid ""
-"This will be displayed to your users when the forums are open. This text has a class "
-"of \"forum_text\" if you would like to style it differently"
+"This will be displayed to your users when the forums are closed. This text "
+"has a class of \"forum_text\" if you would like to style it differently"
 msgstr ""
-"当论坛开放时，这将显示给您的用户。如果您想要不同的样式，此文本具有 \"forum_text\" 类"
+"当论坛关闭时，这将显示给您的用户。如果您想要不同的样式，此文本具有 "
+"\"forum_text\" 类"
+
+#: includes/widgets.php:119
+msgid ""
+"This will be displayed to your users when the forums are open. This text has "
+"a class of \"forum_text\" if you would like to style it differently"
+msgstr ""
+"当论坛开放时，这将显示给您的用户。如果您想要不同的样式，此文本具有 "
+"\"forum_text\" 类"
+
+#: includes/admin.php:1993
+msgid "This will disable the bbPress user profile pages to prevent spam."
+msgstr "这将禁用 bbPress 用户资料页面以防止垃圾信息。"
+
+#: includes/admin.php:2009
+msgid ""
+"This will redirect users from single reply pages to the parent topic page."
+msgstr "这将把用户从单个回复页面重定向到父话题页面。"
+
+#: includes/admin.php:2001
+msgid "This will remove avatars from topics, replies, and user profiles."
+msgstr "这将从话题、回复和用户资料中移除头像。"
 
 #: includes/widgets.php:53 includes/widgets.php:417 includes/widgets.php:604
 #: includes/widgets.php:738 includes/widgets.php:843 includes/widgets.php:972
 msgid "Title:"
 msgstr "标题："
 
-#: includes/admin.php:962
+#: includes/admin.php:1289
 msgid "Topic author name"
 msgstr "话题作者姓名"
 
-#: includes/admin.php:179
+#: includes/admin.php:203
 msgid "Topic Creator"
 msgstr "话题创建者"
 
-#: includes/core.php:399
+#: includes/core.php:398
 msgid "Topic has been successfully moved."
 msgstr "话题已成功移动。"
+
+#: bbpress-support-toolkit.php:290
+msgid "Topic ID not found"
+msgstr "未找到话题 ID"
 
 #: includes/core.php:1169
 msgid "Topic in:"
 msgstr "话题在："
 
-#: includes/admin.php:272 includes/admin.php:583
+#: includes/admin.php:296
 msgid "Topic Labels"
 msgstr "话题标签"
 
-#: includes/admin.php:577
-msgid "Topic Status"
-msgstr "话题状态"
+#: bbpress-support-toolkit.php:293
+msgid "Topic locked successfully"
+msgstr "话题锁定成功"
 
-#: includes/admin.php:124
+#: includes/admin.php:775
+msgid "Topic Management"
+msgstr "话题管理"
+
+#: includes/admin.php:469
+msgid "Topic Notification Body"
+msgstr "话题通知正文"
+
+#: includes/admin.php:460
+msgid "Topic Notification Subject"
+msgstr "话题通知主题"
+
+#: includes/admin.php:148
 msgid "Topic Status Settings"
 msgstr "话题状态设置"
 
-#: includes/core.php:569
+#: includes/enhanced-features.php:435
+msgid "Topic status updated"
+msgstr "话题状态已更新"
+
+#: includes/core.php:568
 msgid "Topic Status:"
 msgstr "话题状态："
 
-#: includes/admin.php:959
+#: includes/admin.php:1286
 msgid "Topic title"
 msgstr "话题标题"
+
+#: bbpress-support-toolkit.php:294
+msgid "Topic unlocked successfully"
+msgstr "话题解锁成功"
 
 #: includes/widgets.php:746 includes/widgets.php:851
 msgid "Topics to show:"
 msgstr "显示话题数："
 
-#. Description of the plugin/theme
+#. Description of the plugin
 msgid ""
 "Transform your bbPress forums into comprehensive support forums with status "
 "management, user ranking, and premium features"
 msgstr "将您的bbPress论坛转换为具有状态管理、用户等级和高级功能的综合支持论坛"
 
-#: includes/core.php:604
+#: bbpress-support-toolkit.php:291 includes/enhanced-features.php:402
+#: includes/enhanced-features.php:424
+msgid "Unlock Topic"
+msgstr "解锁话题"
+
+#: includes/core.php:603
 msgid "Update"
 msgstr "更新"
 
-#: includes/admin.php:1644
+#: includes/admin.php:1970
 #, php-format
 msgid "Updated %s topic."
 msgid_plural "Updated %s topics."
 msgstr[0] "已更新 %s 个话题。"
 
-#: includes/admin.php:1534 includes/core.php:1049
+#: includes/admin.php:1861 includes/core.php:1049
 msgid "Urgent"
 msgstr "紧急"
 
-#: includes/admin.php:202
+#: includes/admin.php:226
 msgid "Urgent Topic Status"
 msgstr "紧急话题状态"
 
@@ -991,39 +1469,79 @@ msgstr "紧急话题状态"
 msgid "Urgent Topics"
 msgstr "紧急话题"
 
-#: includes/admin.php:86 includes/admin.php:574
+#: includes/admin.php:110
 msgid "User Ranking"
 msgstr "用户等级"
 
-#: includes/admin.php:850
+#: includes/admin.php:1176
 msgid ""
-"User ranking allows you to differentiate and reward your forum users with Custom "
-"Titles based on the number of topics and replies they have contributed to."
+"User ranking allows you to differentiate and reward your forum users with "
+"Custom Titles based on the number of topics and replies they have "
+"contributed to."
 msgstr ""
-"用户等级允许您根据用户发表的话题和回复数量，为论坛用户提供自定义头衔以示区别和奖励。"
+"用户等级允许您根据用户发表的话题和回复数量，为论坛用户提供自定义头衔以示区别"
+"和奖励。"
 
-#: includes/admin.php:96
-#, php-format
+#: includes/admin.php:120
 msgid "User ranking level %d"
 msgstr "用户等级 %d"
 
-#: includes/admin.php:1417
+#: includes/admin.php:1743
 msgid "Users with this capability can view all private replies."
 msgstr "具有此权限的用户可以查看所有私有回复。"
 
-#: includes/admin.php:546
+#: includes/admin.php:744
 #, php-format
 msgid "Version: %s"
 msgstr "版本：%s"
 
-#: includes/core.php:735
+#: includes/enhanced-features.php:305
+msgid "View Canned Reply"
+msgstr "查看预设回复"
+
+#: includes/advanced-features.php:368
+#, php-format
+msgid "Warning: %s is currently viewing this topic (since %s)"
+msgstr "警告：%s 正在查看此话题（自 %s 起）"
+
+#: includes/admin.php:2184
+msgid ""
+"Warns moderators when another moderator is currently viewing the same topic "
+"to prevent conflicts."
+msgstr "当另一个版主正在查看同一话题时警告版主，以防止冲突。"
+
+#: includes/core.php:734
 msgid "You do not have permission to move topics."
 msgstr "您没有移动话题的权限。"
 
-#: includes/widgets.php:922
+#: includes/admin.php:2067
+msgid "You do not have permission to perform this action."
+msgstr "您没有执行此操作的权限。"
+
+#: includes/widgets.php:921
 msgid "You have not claimed any topics yet."
 msgstr "您还没有认领任何话题。"
 
-#: bbpress-support-toolkit.php:149 includes/admin.php:1428
+#: bbpress-support-toolkit.php:163 includes/admin.php:1754
 msgid "Your registration at %BLOGNAME%"
 msgstr "您在 %BLOGNAME% 的注册"
+
+#: includes/admin.php:1161
+msgid "专家用户"
+msgstr "专家用户"
+
+#: includes/admin.php:1146
+msgid "新手"
+msgstr "新手"
+
+#: includes/admin.php:1151
+msgid "活跃用户"
+msgstr "活跃用户"
+
+#: includes/admin.php:1166
+msgid "论坛大师"
+msgstr "论坛大师"
+
+#: includes/admin.php:1156
+msgid "资深用户"
+msgstr "资深用户"

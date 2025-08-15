@@ -1,13 +1,231 @@
-.resolved {
-    color: green;
+/* Topic Status Styles */
+.resolved, .bbps-resolved {
+    color: #28a745;
+    font-weight: 600;
 }
 
-.urgent {
-    color: red;
+.urgent, .bbps-urgent {
+    color: #dc3545;
+    font-weight: 600;
 }
 
-.claimed {
-    color: #efbf1c;
+.claimed, .bbps-claimed {
+    color: #ffc107;
+    font-weight: 600;
+}
+
+/* Report Content Styles */
+.bbps-report-content, .bbp-report-content {
+    color: #dc3545;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.bbps-report-content:hover, .bbp-report-content:hover {
+    color: #a71d2a;
+    text-decoration: underline;
+}
+
+.bbps-reported {
+    color: #6c757d !important;
+    cursor: default;
+    text-decoration: none !important;
+}
+
+.bbps-reported:hover {
+    color: #6c757d !important;
+    text-decoration: none !important;
+}
+
+/* Live Preview Styles */
+.bbps-preview-wrapper, #bbps-preview-wrapper {
+    margin: 10px 0;
+}
+
+#bbps-preview-btn, .bbp-preview-button {
+    background: #0073aa;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+#bbps-preview-btn:hover, .bbp-preview-button:hover {
+    background: #005a87;
+}
+
+#bbps-preview-content, #bbp-post-preview {
+    margin-top: 10px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+    border-radius: 3px;
+    display: none;
+}
+
+#bbps-preview-content.loading, #bbp-post-preview.loading {
+    opacity: 0.6;
+}
+
+/* Canned Replies Styles */
+.bbps-canned-replies-wrapper, .bbp-canned-replies-wrapper {
+    margin: 10px 0;
+}
+
+.bbps-toggle-canned-replies, .bbp-toggle-replies {
+    background: #0073aa;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 13px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.bbps-toggle-canned-replies:hover, .bbp-toggle-replies:hover {
+    background: #005a87;
+    color: white;
+    text-decoration: none;
+}
+
+.bbps-canned-replies-list, .bbp-canned-replies-list {
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 3px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.bbps-canned-reply-item, .bbp-canned-reply-insert {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.bbps-canned-reply-item:last-child, .bbp-canned-reply-insert:last-child {
+    border-bottom: none;
+}
+
+.bbps-canned-reply-item:hover, .bbp-canned-reply-insert:hover,
+.bbps-canned-reply-item.bbps-hover, .bbp-canned-reply-insert.bbps-hover {
+    background-color: #f0f0f1;
+}
+
+.bbps-canned-reply-item.bbps-inserted, .bbp-canned-reply-insert.bbps-inserted {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.bbps-canned-reply-item strong {
+    display: block;
+    margin-bottom: 5px;
+    color: #0073aa;
+}
+
+.bbps-canned-reply-item p {
+    margin: 0;
+    color: #666;
+    font-size: 13px;
+}
+
+/* Admin Notes Styles */
+.bbps-admin-notes {
+    margin: 15px 0;
+    padding: 15px;
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 3px;
+}
+
+.bbps-admin-notes h4 {
+    margin: 0 0 10px 0;
+    color: #856404;
+}
+
+.bbps-admin-note {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 3px;
+}
+
+.bbps-admin-note:last-child {
+    margin-bottom: 0;
+}
+
+.bbps-note-meta {
+    font-size: 12px;
+    color: #6c757d;
+    margin-bottom: 5px;
+}
+
+.bbps-note-content {
+    font-size: 13px;
+}
+
+.bbps-add-note-wrapper {
+    margin: 10px 0;
+}
+
+.bbps-add-note-link, .bbp-add-note-link {
+    color: #0073aa;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.bbps-add-note-link:hover, .bbp-add-note-link:hover {
+    text-decoration: underline;
+}
+
+.bbps-note-form, .bbp-note-form {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+}
+
+.bbps-note-form textarea, .bbp-note-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    resize: vertical;
+}
+
+.bbps-note-form button, .bbp-note-form button {
+    background: #0073aa;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.bbps-note-form button:hover, .bbp-note-form button:hover {
+    background: #005a87;
+}
+
+.bbps-topic-read {
+    opacity: 0.7;
+}
+
+.bbps-topic-unread {
+    font-weight: bold;
+}
+
+.bbps-topic-locked::before {
+    content: "🔒 ";
+    color: #6c757d;
 }
 
 .bbps-support-forums-message {
@@ -98,6 +316,223 @@
 
 .bbps-section .card {
     margin: 0;
+}
+
+/* Enhanced Features Styles */
+
+/* Admin Notes */
+.bbps-admin-notes {
+    margin: 15px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+.bbps-admin-note {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #fff;
+    border-left: 4px solid #007cba;
+}
+
+.bbps-note-meta {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.bbps-add-note-wrapper {
+    margin: 10px 0;
+}
+
+.bbps-add-note-link {
+    color: #007cba;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.bbps-note-form {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+.bbps-note-form textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Canned Replies */
+.bbps-canned-replies-wrapper {
+    margin: 0 0 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+.bbps-toggle-canned-replies {
+    color: #007cba;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.bbps-canned-replies-list {
+    display: none;
+    margin-top: 10px;
+}
+
+.bbps-canned-reply-item {
+    padding: 10px;
+    margin: 5px 0;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.bbps-canned-reply-item:hover,
+.bbps-canned-reply-item.bbps-hover {
+    background: #e9ecef;
+    border-color: #007cba;
+}
+
+.bbps-canned-reply-item.bbps-inserted {
+    background: #d4edda;
+    border-color: #28a745;
+}
+
+/* Live Preview */
+.bbps-preview-wrapper {
+    margin: 10px 0;
+}
+
+#bbps-preview-btn {
+    margin-bottom: 10px;
+}
+
+#bbps-preview-content {
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+#bbps-preview-content.loading::before {
+    content: "Loading preview...";
+    color: #666;
+    font-style: italic;
+}
+
+/* Mark as Read */
+.bbps-mark-read {
+    color: #007cba;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.bbps-mark-read:hover {
+    text-decoration: underline;
+}
+
+.bbps-mark-all-read {
+    display: inline-block;
+    margin: 10px 0;
+    padding: 8px 15px;
+    background: #007cba;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.bbps-mark-all-read:hover {
+    background: #005a87;
+    color: #fff;
+}
+
+/* Topic Lock */
+.bbps-topic-lock {
+    color: #dc3545;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.bbps-topic-lock:hover {
+    text-decoration: underline;
+}
+
+/* Report Content */
+.bbps-report-content {
+    color: #dc3545;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.bbps-report-content:hover {
+    text-decoration: underline;
+}
+
+/* Notifications */
+.bbps-notification {
+    position: fixed;
+    top: 32px;
+    right: 20px;
+    padding: 12px 20px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 600;
+    z-index: 9999;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.bbps-notification.bbps-info {
+    background: #007cba;
+}
+
+.bbps-notification.bbps-success {
+    background: #28a745;
+}
+
+.bbps-notification.bbps-warning {
+    background: #ffc107;
+    color: #212529;
+}
+
+.bbps-notification.bbps-error {
+    background: #dc3545;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .bbps-canned-replies-wrapper,
+    .bbps-admin-notes,
+    .bbps-preview-wrapper {
+        margin: 10px 0;
+        padding: 8px;
+    }
+    
+    .bbps-canned-reply-item {
+        padding: 8px;
+    }
+    
+    .bbps-notification {
+        right: 10px;
+        left: 10px;
+        top: 20px;
+    }
+}
+
+.bbps-section .card {
     border: 1px solid #ccd0d4;
     border-radius: 4px;
     background: #fff;

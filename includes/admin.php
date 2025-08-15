@@ -1,8 +1,20 @@
 <?php
 
+// Ensure WordPress is loaded and prevent direct access
 if (!defined("ABSPATH")) {
     exit();
 }
+
+// bbPress activation check removed as requested
+
+// Ensure we have WordPress admin functions available
+// This file should only be loaded when WordPress is fully initialized
+if (!function_exists('add_action') || !function_exists('wp_nonce_field') || !function_exists('esc_html_e')) {
+    // WordPress is not fully loaded, exit gracefully
+    return;
+}
+
+
 
 add_action("bbp_forum_metabox", "bbps_extend_forum_attributes_mb");
 
@@ -87,8 +99,12 @@ add_action("admin_init", "bbps_register_admin_settings");
 add_action("wp_ajax_bbps_save_settings", "bbps_ajax_save_settings");
 add_action("admin_enqueue_scripts", "bbps_enqueue_admin_scripts");
 
+register_activation_hook(dirname(__FILE__) . '/../bbpress-support-toolkit.php', 'bbps_init_default_user_ranking');
+
 function bbps_register_admin_settings()
 {
+    bbps_init_default_user_ranking();
+    
     add_settings_section(
         "bbps-user-ranking",
         __("User Ranking", "bbpress-support-toolkit"),
@@ -386,6 +402,97 @@ function bbps_register_admin_settings()
     );
     register_setting("bbpress-support-toolkit", "bbps_enable_private_replies", "intval");
 
+    // Additional Features Section
+    add_settings_section(
+        "bbps-additional-features",
+        __("Additional Features", "bbpress-support-toolkit"),
+        "bbps_admin_setting_callback_additional_section",
+        "bbpress-support-toolkit"
+    );
+
+    add_settings_field(
+        "bbps_disable_user_page",
+        __("Disable User Pages", "bbpress-support-toolkit"),
+        "bbps_admin_setting_callback_disable_user_page",
+        "bbpress-support-toolkit",
+        "bbps-additional-features"
+    );
+    register_setting("bbpress-support-toolkit", "bbps_disable_user_page", "intval");
+
+    add_settings_field(
+        "bbps_remove_avatars",
+        __("Remove User Avatars", "bbpress-support-toolkit"),
+        "bbps_admin_setting_callback_remove_avatars",
+        "bbpress-support-toolkit",
+        "bbps-additional-features"
+    );
+    register_setting("bbpress-support-toolkit", "bbps_remove_avatars", "intval");
+
+    add_settings_field(
+        "bbps_redirect_single_replies",
+        __("Redirect Single Replies to Topics", "bbpress-support-toolkit"),
+        "bbps_admin_setting_callback_redirect_single_replies",
+        "bbpress-support-toolkit",
+        "bbps-additional-features"
+    );
+    register_setting("bbpress-support-toolkit", "bbps_redirect_single_replies", "intval");
+
+    add_settings_field(
+        "bbps_custom_notifications",
+        __("Enable Custom Notifications", "bbpress-support-toolkit"),
+        "bbps_admin_setting_callback_custom_notifications",
+        "bbpress-support-toolkit",
+        "bbps-additional-features"
+    );
+    register_setting("bbpress-support-toolkit", "bbps_custom_notifications", "intval");
+
+    // Custom Notification Settings (only show when custom notifications are enabled)
+    if (get_option('bbps_custom_notifications')) {
+        add_settings_section(
+            "bbps-notification-settings",
+            __("Notification Settings", "bbpress-support-toolkit"),
+            "bbps_admin_setting_callback_notification_settings_section",
+            "bbpress-support-toolkit"
+        );
+
+        add_settings_field(
+            "bbps_topic_notice_title",
+            __("Topic Notification Subject", "bbpress-support-toolkit"),
+            "bbps_admin_setting_callback_topic_notice_title",
+            "bbpress-support-toolkit",
+            "bbps-notification-settings"
+        );
+        register_setting("bbpress-support-toolkit", "bbps_topic_notice_title", "sanitize_text_field");
+
+        add_settings_field(
+            "bbps_topic_notice_body",
+            __("Topic Notification Body", "bbpress-support-toolkit"),
+            "bbps_admin_setting_callback_topic_notice_body",
+            "bbpress-support-toolkit",
+            "bbps-notification-settings"
+        );
+        register_setting("bbpress-support-toolkit", "bbps_topic_notice_body", "sanitize_textarea_field");
+
+        add_settings_field(
+            "bbps_reply_notice_title",
+            __("Reply Notification Subject", "bbpress-support-toolkit"),
+            "bbps_admin_setting_callback_reply_notice_title",
+            "bbpress-support-toolkit",
+            "bbps-notification-settings"
+        );
+        register_setting("bbpress-support-toolkit", "bbps_reply_notice_title", "sanitize_text_field");
+
+        add_settings_field(
+            "bbps_reply_notice_body",
+            __("Reply Notification Body", "bbpress-support-toolkit"),
+            "bbps_admin_setting_callback_reply_notice_body",
+            "bbpress-support-toolkit",
+            "bbps-notification-settings"
+        );
+        register_setting("bbpress-support-toolkit", "bbps_reply_notice_body", "sanitize_textarea_field");
+    }
+    register_setting("bbpress-support-toolkit", "bbps_enable_private_replies", "intval");
+
     add_settings_field(
         "bbps_private_replies_capability",
         __("Private Replies Capability", "bbpress-support-toolkit"),
@@ -543,11 +650,94 @@ function bbps_register_admin_settings()
         "bbps-forum-enhancements"
     );
     register_setting("bbpress-support-toolkit", "bbps_default_forum_id", "intval");
+
+    // Advanced Features Section
+    add_settings_section(
+        "bbps-advanced-features",
+        __("Advanced Features", "bbpress-support-toolkit"),
+        "bbps_admin_setting_callback_advanced_section",
+        "bbpress-support-toolkit"
+    );
+
+    // Admin Notes
+    add_settings_field(
+        "bbps_enable_admin_notes",
+        __("Enable Admin Notes", "bbpress-support-toolkit"),
+        "bbps_admin_setting_callback_admin_notes",
+        "bbpress-support-toolkit",
+        "bbps-advanced-features"
+    );
+    register_setting("bbpress-support-toolkit", "bbps_enable_admin_notes", "intval");
+
+    // Live Preview
+    add_settings_field(
+        "bbps_enable_live_preview",
+        __("Enable Live Preview", "bbpress-support-toolkit"),
+        "bbps_admin_setting_callback_live_preview",
+        "bbpress-support-toolkit",
+        "bbps-advanced-features"
+    );
+    register_setting("bbpress-support-toolkit", "bbps_enable_live_preview", "intval");
+
+    // Mark as Read
+    add_settings_field(
+        "bbps_enable_mark_as_read",
+        __("Enable Mark as Read", "bbpress-support-toolkit"),
+        "bbps_admin_setting_callback_mark_as_read",
+        "bbpress-support-toolkit",
+        "bbps-advanced-features"
+    );
+    register_setting("bbpress-support-toolkit", "bbps_enable_mark_as_read", "intval");
+
+    // Canned Replies
+    add_settings_field(
+        "bbps_enable_canned_replies",
+        __("Enable Canned Replies", "bbpress-support-toolkit"),
+        "bbps_admin_setting_callback_canned_replies",
+        "bbpress-support-toolkit",
+        "bbps-advanced-features"
+    );
+    register_setting("bbpress-support-toolkit", "bbps_enable_canned_replies", "intval");
+
+    // Report Content
+    add_settings_field(
+        "bbps_enable_report_content",
+        __("Enable Report Content", "bbpress-support-toolkit"),
+        "bbps_admin_setting_callback_report_content",
+        "bbpress-support-toolkit",
+        "bbps-advanced-features"
+    );
+    register_setting("bbpress-support-toolkit", "bbps_enable_report_content", "intval");
+
+    // Topic Lock
+    add_settings_field(
+        "bbps_enable_topic_lock",
+        __("Enable Topic Lock", "bbpress-support-toolkit"),
+        "bbps_admin_setting_callback_topic_lock",
+        "bbpress-support-toolkit",
+        "bbps-advanced-features"
+    );
+    register_setting("bbpress-support-toolkit", "bbps_enable_topic_lock", "intval");
 }
 
 function bbps_admin_page()
 {
-    $active_tab = isset($_GET['tab']) ? $_GET['tab'] : 'user-ranking';
+    // 标签页映射：将旧标签页映射到新的分组
+    $tab_mapping = array(
+        'user-ranking' => 'basic-settings',
+        'support-forum' => 'basic-settings',
+        'topic-status' => 'topic-management',
+        'topic-labels' => 'topic-management',
+        'private-replies' => 'forum-features',
+        'forum-enhancements' => 'forum-features',
+        'search-settings' => 'search-seo',
+        'seo-settings' => 'search-seo',
+        'additional-features' => 'advanced-features',
+        'advanced-features' => 'advanced-features'
+    );
+    
+    $requested_tab = isset($_GET['tab']) ? $_GET['tab'] : 'basic-settings';
+     $active_tab = isset($tab_mapping[$requested_tab]) ? $tab_mapping[$requested_tab] : 'basic-settings';
     ?>
     <div class="wrap">
         <h1><?php echo esc_html(get_admin_page_title()); ?>
@@ -578,29 +768,20 @@ function bbps_admin_page()
         <?php endif; ?>
         <div class="card">
         <div class="bbps-settings-tabs">
-            <button type="button" class="bbps-tab <?php echo $active_tab == 'support-forum' ? 'active' : ''; ?>" data-tab="support-forum">
-                <?php esc_html_e('Support Forum', 'bbpress-support-toolkit'); ?>
+            <button type="button" class="bbps-tab <?php echo $active_tab == 'basic-settings' ? 'active' : ''; ?>" data-tab="basic-settings">
+                <?php esc_html_e('Basic Settings', 'bbpress-support-toolkit'); ?>
             </button>
-             <button type="button" class="bbps-tab <?php echo $active_tab == 'topic-status' ? 'active' : ''; ?>" data-tab="topic-status">
-                <?php esc_html_e('Topic Status', 'bbpress-support-toolkit'); ?>
+            <button type="button" class="bbps-tab <?php echo $active_tab == 'topic-management' ? 'active' : ''; ?>" data-tab="topic-management">
+                <?php esc_html_e('Topic Management', 'bbpress-support-toolkit'); ?>
             </button>
-            <button type="button" class="bbps-tab <?php echo $active_tab == 'topic-labels' ? 'active' : ''; ?>" data-tab="topic-labels">
-                <?php esc_html_e('Topic Labels', 'bbpress-support-toolkit'); ?>
+            <button type="button" class="bbps-tab <?php echo $active_tab == 'forum-features' ? 'active' : ''; ?>" data-tab="forum-features">
+                <?php esc_html_e('Forum Features', 'bbpress-support-toolkit'); ?>
             </button>
-            <button type="button" class="bbps-tab <?php echo $active_tab == 'seo-settings' ? 'active' : ''; ?>" data-tab="seo-settings">
-                <?php esc_html_e('SEO Settings', 'bbpress-support-toolkit'); ?>
+            <button type="button" class="bbps-tab <?php echo $active_tab == 'search-seo' ? 'active' : ''; ?>" data-tab="search-seo">
+                <?php esc_html_e('Search & SEO', 'bbpress-support-toolkit'); ?>
             </button>
-            <button type="button" class="bbps-tab <?php echo $active_tab == 'search-settings' ? 'active' : ''; ?>" data-tab="search-settings">
-                <?php esc_html_e('Search Settings', 'bbpress-support-toolkit'); ?>
-            </button>
-            <button type="button" class="bbps-tab <?php echo $active_tab == 'private-replies' ? 'active' : ''; ?>" data-tab="private-replies">
-                <?php esc_html_e('Private Replies', 'bbpress-support-toolkit'); ?>
-            </button>
-            <button type="button" class="bbps-tab <?php echo $active_tab == 'user-ranking' ? 'active' : ''; ?>" data-tab="user-ranking">
-                <?php esc_html_e('User Ranking', 'bbpress-support-toolkit'); ?>
-            </button>
-            <button type="button" class="bbps-tab <?php echo $active_tab == 'forum-enhancements' ? 'active' : ''; ?>" data-tab="forum-enhancements">
-                <?php esc_html_e('Forum Enhancements', 'bbpress-support-toolkit'); ?>
+            <button type="button" class="bbps-tab <?php echo $active_tab == 'advanced-features' ? 'active' : ''; ?>" data-tab="advanced-features">
+                <?php esc_html_e('Advanced Features', 'bbpress-support-toolkit'); ?>
             </button>
         </div>
 
@@ -608,36 +789,36 @@ function bbps_admin_page()
             <form action="options.php" method="post">
                 <?php settings_fields("bbpress-support-toolkit"); ?>
  
-                 <div id="bbps-support-forum-section" class="bbps-section" data-section="support-forum" style="<?php echo $active_tab === 'support-forum' ? '' : 'display: none;'; ?>">
+                <!-- 基础设置：用户排名 + 支持论坛 -->
+                <div id="bbps-basic-settings-section" class="bbps-section" data-section="basic-settings" style="<?php echo $active_tab === 'basic-settings' ? '' : 'display: none;'; ?>">
+                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-user-ranking"); ?>
                         <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-support-forum"); ?>
                 </div>
-               
-                <div id="bbps-topic-status-section" class="bbps-section" data-section="topic-status" style="<?php echo $active_tab === 'topic-status' ? '' : 'display: none;'; ?>">
-                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-topic-status"); ?>
-                </div>
-                                
-                <div id="bbps-topic-labels-section" class="bbps-section" data-section="topic-labels" style="<?php echo $active_tab === 'topic-labels' ? '' : 'display: none;'; ?>">
-                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-topic-labels"); ?>
-                </div>
 
-                <div id="bbps-seo-settings-section" class="bbps-section" data-section="seo-settings" style="<?php echo $active_tab === 'seo-settings' ? '' : 'display: none;'; ?>">
-                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-seo-settings"); ?>
-                </div>
-                                
-                <div id="bbps-search-settings-section" class="bbps-section" data-section="search-settings" style="<?php echo $active_tab === 'search-settings' ? '' : 'display: none;'; ?>">
-                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-search-settings"); ?>
-                </div>
-                
-                <div id="bbps-private-replies-section" class="bbps-section" data-section="private-replies" style="<?php echo $active_tab === 'private-replies' ? '' : 'display: none;'; ?>">
+                <!-- 主题管理：主题状态 + 主题标签 + 私密回复 -->
+                <div id="bbps-topic-management-section" class="bbps-section" data-section="topic-management" style="<?php echo $active_tab === 'topic-management' ? '' : 'display: none;'; ?>">
+                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-topic-status"); ?>
+                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-topic-labels"); ?>
                         <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-private-replies"); ?>
                 </div>
-               
-                <div id="bbps-user-ranking-section" class="bbps-section" data-section="user-ranking" style="<?php echo $active_tab === 'user-ranking' ? '' : 'display: none;'; ?>">
-                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-user-ranking"); ?>
-                </div>
-                 
-                <div id="bbps-forum-enhancements-section" class="bbps-section" data-section="forum-enhancements" style="<?php echo $active_tab === 'forum-enhancements' ? '' : 'display: none;'; ?>">
+                
+                <!-- 功能增强：论坛增强 + 附加功能 -->
+                <div id="bbps-forum-features-section" class="bbps-section" data-section="forum-features" style="<?php echo $active_tab === 'forum-features' ? '' : 'display: none;'; ?>">
                         <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-forum-enhancements"); ?>
+                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-additional-features"); ?>
+                        <?php if (get_option('bbps_custom_notifications')) : ?>
+                            <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-notification-settings"); ?>
+                        <?php endif; ?>
+                </div>
+                                
+                <!-- 搜索与SEO：搜索设置 + SEO设置 -->
+                <div id="bbps-search-seo-section" class="bbps-section" data-section="search-seo" style="<?php echo $active_tab === 'search-seo' ? '' : 'display: none;'; ?>">
+                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-search-settings"); ?>
+                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-seo-settings"); ?>
+                </div>
+
+                <div id="bbps-advanced-features-section" class="bbps-section" data-section="advanced-features" style="<?php echo $active_tab === 'advanced-features' ? '' : 'display: none;'; ?>">
+                        <?php do_settings_sections_for_tab("bbpress-support-toolkit", "bbps-advanced-features"); ?>
                 </div>
 
                 <div id="bbps-save-status" class="notice" style="display: none; margin-top: 10px;"></div>
@@ -652,6 +833,12 @@ function bbps_admin_page()
     <script type="text/javascript">
     jQuery(document).ready(function($) {
         var currentTab = '<?php echo esc_js($active_tab); ?>';
+        
+        // 如果当前标签页不在新的标签页列表中，设置为默认标签页
+        var validTabs = ['basic-settings', 'topic-management', 'forum-features', 'search-seo', 'advanced-features'];
+        if (validTabs.indexOf(currentTab) === -1) {
+            currentTab = 'basic-settings';
+        }
         
         $('.bbps-tab').on('click', function() {
             $('.bbps-tab').removeClass('active');
@@ -911,6 +1098,11 @@ function bbps_validate_options($input)
         $options = [];
     }
 
+    // 如果选项为空，设置默认参数
+    if (empty($options)) {
+        $options = bbps_get_default_user_ranking_options();
+    }
+
     if (is_array($input)) {
         $i = 1;
         foreach ($input as $array) {
@@ -928,6 +1120,54 @@ function bbps_validate_options($input)
         }
     }
     return $options;
+}
+
+/**
+ * 初始化用户等级默认参数
+ */
+function bbps_init_default_user_ranking()
+{
+    $existing_options = get_option('bbps_reply_count', []);
+    
+    // 如果选项不存在或为空，设置默认值
+    if (empty($existing_options)) {
+        $default_options = bbps_get_default_user_ranking_options();
+        update_option('bbps_reply_count', $default_options);
+    }
+}
+
+/**
+ * 获取用户等级的默认参数
+ */
+function bbps_get_default_user_ranking_options()
+{
+    return [
+        1 => [
+            'title' => __('新手', 'bbpress-support-toolkit'),
+            'start' => '1',
+            'end' => '10'
+        ],
+        2 => [
+            'title' => __('活跃用户', 'bbpress-support-toolkit'),
+            'start' => '11',
+            'end' => '50'
+        ],
+        3 => [
+            'title' => __('资深用户', 'bbpress-support-toolkit'),
+            'start' => '51',
+            'end' => '100'
+        ],
+        4 => [
+            'title' => __('专家用户', 'bbpress-support-toolkit'),
+            'start' => '101',
+            'end' => '200'
+        ],
+        5 => [
+            'title' => __('论坛大师', 'bbpress-support-toolkit'),
+            'start' => '201',
+            'end' => '999999'
+        ]
+    ];
 }
 
 function bbps_admin_setting_callback_ranking_section()
@@ -1726,17 +1966,93 @@ function bbps_bulk_action_admin_notice()
     if (!empty($_REQUEST["bbps_bulk_updated"])) {
         $count = intval($_REQUEST["bbps_bulk_updated"]);
         printf(
-            '<div id="message" class="updated fade"><p>' .
-                _n(
-                    "Updated %s topic.",
-                    "Updated %s topics.",
-                    $count,
-                    "bbpress-support-toolkit"
-                ) .
-                "</p></div>",
+            '<div id="message" class="updated notice is-dismissible"><p>' .
+            _n(
+                "Updated %s topic.",
+                "Updated %s topics.",
+                $count,
+                "bbpress-support-toolkit"
+            ) .
+            "</p></div>",
             $count
         );
     }
+}
+
+// Additional Features Callback Functions
+function bbps_admin_setting_callback_additional_section()
+{
+    echo '<p>' . __("Additional features to enhance your bbPress forums.", "bbpress-support-toolkit") . '</p>';
+}
+
+function bbps_admin_setting_callback_disable_user_page()
+{
+    $option = get_option("bbps_disable_user_page", 0);
+    echo '<input type="checkbox" name="bbps_disable_user_page" value="1" ' . checked(1, $option, false) . ' />';
+    echo '<label for="bbps_disable_user_page">' . __("Disable bbPress user profile pages", "bbpress-support-toolkit") . '</label>';
+    echo '<p class="description">' . __("This will disable the bbPress user profile pages to prevent spam.", "bbpress-support-toolkit") . '</p>';
+}
+
+function bbps_admin_setting_callback_remove_avatars()
+{
+    $option = get_option("bbps_remove_avatars", 0);
+    echo '<input type="checkbox" name="bbps_remove_avatars" value="1" ' . checked(1, $option, false) . ' />';
+    echo '<label for="bbps_remove_avatars">' . __("Remove user avatars from bbPress", "bbpress-support-toolkit") . '</label>';
+    echo '<p class="description">' . __("This will remove avatars from topics, replies, and user profiles.", "bbpress-support-toolkit") . '</p>';
+}
+
+function bbps_admin_setting_callback_redirect_single_replies()
+{
+    $option = get_option("bbps_redirect_single_replies", 0);
+    echo '<input type="checkbox" name="bbps_redirect_single_replies" value="1" ' . checked(1, $option, false) . ' />';
+    echo '<label for="bbps_redirect_single_replies">' . __("Redirect single reply pages to parent topics", "bbpress-support-toolkit") . '</label>';
+    echo '<p class="description">' . __("This will redirect users from single reply pages to the parent topic page.", "bbpress-support-toolkit") . '</p>';
+}
+
+function bbps_admin_setting_callback_custom_notifications()
+{
+    $option = get_option("bbps_custom_notifications", 0);
+    echo '<input type="checkbox" name="bbps_custom_notifications" value="1" ' . checked(1, $option, false) . ' />';
+    echo '<label for="bbps_custom_notifications">' . __("Enable custom email notifications", "bbpress-support-toolkit") . '</label>';
+    echo '<p class="description">' . __("This will allow you to customize the email notifications sent to forum subscribers.", "bbpress-support-toolkit") . '</p>';
+}
+
+// Notification Settings Callback Functions
+function bbps_admin_setting_callback_notification_settings_section()
+{
+    echo '<p>' . __("Customize the email notifications sent to forum and topic subscribers.", "bbpress-support-toolkit") . '</p>';
+}
+
+function bbps_admin_setting_callback_topic_notice_title()
+{
+    $default_title = '[' . get_option('blogname') . '] {title}';
+    $value = get_option('bbps_topic_notice_title', $default_title);
+    echo '<input name="bbps_topic_notice_title" type="text" id="bbps_topic_notice_title" value="' . esc_attr($value) . '" class="regular-text" />';
+    echo '<p class="description">' . __("The subject of the topic notification email. Use {title} for the topic title.", "bbpress-support-toolkit") . '</p>';
+}
+
+function bbps_admin_setting_callback_topic_notice_body()
+{
+    $default = '{author} wrote:\n\n{content}\n\nPost Link: {url}\n\n-----------\n\nYou are receiving this email because you subscribed to the {forum_name} forum.\n\nLogin and visit the forum to unsubscribe from these emails.';
+    $value = get_option('bbps_topic_notice_body', $default);
+    echo '<textarea name="bbps_topic_notice_body" class="large-text" rows="15" id="bbps_topic_notice_body">' . esc_textarea($value) . '</textarea>';
+    echo '<p class="description">' . __("Email message sent to forum subscribers when a new topic is posted. Available tokens: {author}, {content}, {url}, {forum_name}", "bbpress-support-toolkit") . '</p>';
+}
+
+function bbps_admin_setting_callback_reply_notice_title()
+{
+    $default_title = '[' . get_option('blogname') . '] {title}';
+    $value = get_option('bbps_reply_notice_title', $default_title);
+    echo '<input name="bbps_reply_notice_title" type="text" id="bbps_reply_notice_title" value="' . esc_attr($value) . '" class="regular-text" />';
+    echo '<p class="description">' . __("The subject of the reply notification email. Use {title} for the topic title.", "bbpress-support-toolkit") . '</p>';
+}
+
+function bbps_admin_setting_callback_reply_notice_body()
+{
+    $default = '{author} wrote:\n\n{content}\n\nPost Link: {url}\n\n-----------\n\nYou are receiving this email because you subscribed to a forum topic.\n\nLogin and visit the topic to unsubscribe from these emails.';
+    $value = get_option('bbps_reply_notice_body', $default);
+    echo '<textarea name="bbps_reply_notice_body" class="large-text" rows="15" id="bbps_reply_notice_body">' . esc_textarea($value) . '</textarea>';
+    echo '<p class="description">' . __("Email message sent to topic subscribers when a new reply is posted. Available tokens: {author}, {content}, {url}", "bbpress-support-toolkit") . '</p>';
 }
 
 // Ajax处理函数
@@ -1779,13 +2095,18 @@ function bbps_ajax_save_settings() {
     }
     
     foreach ($settings_to_save as $setting_name) {
-        $value = isset($parsed_data[$setting_name]) ? $parsed_data[$setting_name] : '';
-        
-        // 基本验证
-        if (strpos($setting_name, '_count') !== false || strpos($setting_name, '_enable') !== false) {
-            $value = intval($value);
+        // 对于复选框类型的设置，如果没有在表单数据中，说明未选中，应该设为0
+        if (strpos($setting_name, '_enable') !== false) {
+            $value = isset($parsed_data[$setting_name]) ? 1 : 0;
         } else {
-            $value = sanitize_text_field($value);
+            $value = isset($parsed_data[$setting_name]) ? $parsed_data[$setting_name] : '';
+            
+            // 基本验证
+            if (strpos($setting_name, '_count') !== false) {
+                $value = intval($value);
+            } else {
+                $value = sanitize_text_field($value);
+            }
         }
         
         update_option($setting_name, $value);
@@ -1812,4 +2133,58 @@ function bbps_enqueue_admin_scripts($hook) {
         'saved_text' => __('Settings saved successfully!', 'bbpress-support-toolkit'),
         'error_text' => __('Error saving settings. Please try again.', 'bbpress-support-toolkit')
     ));
+}
+
+// Advanced Features Callback Functions
+function bbps_admin_setting_callback_advanced_section()
+{
+    echo '<p>' . __('Advanced features to enhance your bbPress forums with additional functionality.', 'bbpress-support-toolkit') . '</p>';
+}
+
+function bbps_admin_setting_callback_admin_notes()
+{
+    $option = get_option('bbps_enable_admin_notes', 0);
+    echo '<input type="checkbox" name="bbps_enable_admin_notes" value="1" ' . checked(1, $option, false) . ' />';
+    echo '<label for="bbps_enable_admin_notes">' . __('Enable admin notes for topics and replies', 'bbpress-support-toolkit') . '</label>';
+    echo '<p class="description">' . __('Allows administrators to add private notes to topics and replies that are only visible to other administrators.', 'bbpress-support-toolkit') . '</p>';
+}
+
+function bbps_admin_setting_callback_live_preview()
+{
+    $option = get_option('bbps_enable_live_preview', 0);
+    echo '<input type="checkbox" name="bbps_enable_live_preview" value="1" ' . checked(1, $option, false) . ' />';
+    echo '<label for="bbps_enable_live_preview">' . __('Enable live preview for topics and replies', 'bbpress-support-toolkit') . '</label>';
+    echo '<p class="description">' . __('Allows users to preview their posts in real-time before submitting.', 'bbpress-support-toolkit') . '</p>';
+}
+
+function bbps_admin_setting_callback_mark_as_read()
+{
+    $option = get_option('bbps_enable_mark_as_read', 0);
+    echo '<input type="checkbox" name="bbps_enable_mark_as_read" value="1" ' . checked(1, $option, false) . ' />';
+    echo '<label for="bbps_enable_mark_as_read">' . __('Enable mark as read functionality', 'bbpress-support-toolkit') . '</label>';
+    echo '<p class="description">' . __('Allows users to mark topics as read/unread and track their reading progress.', 'bbpress-support-toolkit') . '</p>';
+}
+
+function bbps_admin_setting_callback_canned_replies()
+{
+    $option = get_option('bbps_enable_canned_replies', 0);
+    echo '<input type="checkbox" name="bbps_enable_canned_replies" value="1" ' . checked(1, $option, false) . ' />';
+    echo '<label for="bbps_enable_canned_replies">' . __('Enable canned replies', 'bbpress-support-toolkit') . '</label>';
+    echo '<p class="description">' . __('Allows administrators and moderators to create and use pre-written reply templates.', 'bbpress-support-toolkit') . '</p>';
+}
+
+function bbps_admin_setting_callback_report_content()
+{
+    $option = get_option('bbps_enable_report_content', 0);
+    echo '<input type="checkbox" name="bbps_enable_report_content" value="1" ' . checked(1, $option, false) . ' />';
+    echo '<label for="bbps_enable_report_content">' . __('Enable content reporting', 'bbpress-support-toolkit') . '</label>';
+    echo '<p class="description">' . __('Allows users to report inappropriate topics and replies to administrators.', 'bbpress-support-toolkit') . '</p>';
+}
+
+function bbps_admin_setting_callback_topic_lock()
+{
+    $option = get_option('bbps_enable_topic_lock', 0);
+    echo '<input type="checkbox" name="bbps_enable_topic_lock" value="1" ' . checked(1, $option, false) . ' />';
+    echo '<label for="bbps_enable_topic_lock">' . __('Enable topic lock notifications', 'bbpress-support-toolkit') . '</label>';
+    echo '<p class="description">' . __('Warns moderators when another moderator is currently viewing the same topic to prevent conflicts.', 'bbpress-support-toolkit') . '</p>';
 }

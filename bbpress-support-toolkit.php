@@ -5,7 +5,7 @@
  * Author: Cyberforums.com
  * Author URI: https://cyberforums.com
  * Description: Transform your bbPress forums into comprehensive support forums with status management, user ranking, and premium features
- * Version: 1.2.0
+ * Version: 1.3.0
  * Requires at least: 5.0
  * Tested up to: 6.8
  * Requires PHP: 7.4
@@ -39,7 +39,7 @@ final class BBPress_Support_Toolkit
 
     private function define_constants()
     {
-        define("BBPS_VERSION", "1.2.0");
+        define("BBPS_VERSION", "1.3.0");
         define("BBPS_PLUGIN_FILE", __FILE__);
         define("BBPS_PLUGIN_PATH", plugin_dir_path(__FILE__));
         define("BBPS_PLUGIN_URL", plugin_dir_url(__FILE__));
@@ -54,6 +54,7 @@ final class BBPress_Support_Toolkit
         register_uninstall_hook(__FILE__, ["BBPress_Support_Toolkit", "uninstall"]);
         add_action("plugins_loaded", [$this, "load_textdomain"]);
         add_action("wp_enqueue_scripts", [$this, "enqueue_styles"]);
+        add_action("wp_enqueue_scripts", [$this, "enqueue_frontend_scripts"]);
         add_action("admin_enqueue_scripts", [$this, "enqueue_admin_scripts"]);
         add_action("widgets_init", [$this, "register_widgets"]);
     }
@@ -67,6 +68,8 @@ final class BBPress_Support_Toolkit
         }
 
         require_once BBPS_INCLUDES_PATH . "widgets.php";
+        require_once BBPS_INCLUDES_PATH . "advanced-features.php";
+        require_once BBPS_INCLUDES_PATH . "enhanced-features.php";
     }
 
     public function activate()
@@ -118,6 +121,16 @@ final class BBPress_Support_Toolkit
         delete_option("bbps_enable_email_fix");
         delete_option("bbps_custom_email_from");
         delete_option("bbps_enable_title_length_fix");
+        
+        // Additional Features
+        delete_option("bbps_disable_user_page");
+        delete_option("bbps_remove_avatars");
+        delete_option("bbps_redirect_single_replies");
+        delete_option("bbps_custom_notifications");
+        delete_option("bbps_topic_notice_title");
+        delete_option("bbps_topic_notice_body");
+        delete_option("bbps_reply_notice_title");
+        delete_option("bbps_reply_notice_body");
         delete_option("bbps_max_title_length");
         delete_option("bbps_remove_topic_tags");
         delete_option("bbps_enable_default_forum");
@@ -180,7 +193,17 @@ final class BBPress_Support_Toolkit
             "bbps_max_title_length" => "150",
             "bbps_remove_topic_tags" => "0",
             "bbps_enable_default_forum" => "0",
-            "bbps_default_forum_id" => ""
+            "bbps_default_forum_id" => "",
+            
+            // Additional Features
+            "bbps_disable_user_page" => "0",
+            "bbps_remove_avatars" => "0",
+            "bbps_redirect_single_replies" => "0",
+            "bbps_custom_notifications" => "0",
+            "bbps_topic_notice_title" => "[" . get_option('blogname', 'Site') . "] {title}",
+            "bbps_topic_notice_body" => "{author} wrote:\n\n{content}\n\nPost Link: {url}\n\n-----------\n\nYou are receiving this email because you subscribed to the {forum_name} forum.\n\nLogin and visit the forum to unsubscribe from these emails.",
+            "bbps_reply_notice_title" => "[" . get_option('blogname', 'Site') . "] {title}",
+            "bbps_reply_notice_body" => "{author} wrote:\n\n{content}\n\nPost Link: {url}\n\n-----------\n\nYou are receiving this email because you subscribed to a forum topic.\n\nLogin and visit the topic to unsubscribe from these emails."
         ];
 
         foreach ($default_options as $key => $value) {
@@ -199,12 +222,23 @@ final class BBPress_Support_Toolkit
 
     public function enqueue_styles()
     {
+        // Enqueue main stylesheet
         wp_enqueue_style(
             "bbps-style",
             BBPS_ASSETS_URL . "style.css",
             [],
             BBPS_VERSION
         );
+        
+        // Enqueue advanced features CSS if enabled
+        if (get_option('bbps_enable_advanced_features')) {
+            wp_enqueue_style(
+                "bbps-advanced-style",
+                BBPS_ASSETS_URL . "advanced-features.css",
+                ['bbps-style'],
+                BBPS_VERSION
+            );
+        }
     }
 
     public function enqueue_admin_scripts($hook)
@@ -221,6 +255,57 @@ final class BBPress_Support_Toolkit
             [],
             BBPS_VERSION
         );
+    }
+    
+    public function enqueue_frontend_scripts()
+    {
+        if (!function_exists('bbp_is_forum') && !function_exists('bbp_is_topic') && !function_exists('bbp_is_reply')) {
+            return;
+        }
+        
+        // Enqueue scripts only on bbPress pages
+        if (bbp_is_forum() || bbp_is_topic() || bbp_is_reply() || bbp_is_topic_edit() || bbp_is_reply_edit()) {
+            
+            // Combined main script
+            wp_enqueue_script(
+                'bbps-main',
+                BBPS_ASSETS_URL . 'bbps-combined.js',
+                ['jquery'],
+                BBPS_VERSION,
+                true
+            );
+            
+            // Localize script for AJAX
+            wp_localize_script('bbps-main', 'bbps_ajax', [
+                'ajax_url' => admin_url('admin-ajax.php'),
+                'nonce' => wp_create_nonce('bbps_nonce'),
+                'strings' => [
+                    'mark_read' => __('Mark as Read', 'bbpress-support-toolkit'),
+                    'mark_unread' => __('Mark as Unread', 'bbpress-support-toolkit'),
+                    'loading' => __('Loading...', 'bbpress-support-toolkit'),
+                    'error' => __('Error occurred', 'bbpress-support-toolkit'),
+                    'preview_error' => __('Preview error', 'bbpress-support-toolkit'),
+                    'enter_content' => __('Please enter some content to preview.', 'bbpress-support-toolkit'),
+                    'mark_all_read_confirm' => __('Mark all topics as read?', 'bbpress-support-toolkit'),
+                    'topic_id_not_found' => __('Topic ID not found', 'bbpress-support-toolkit'),
+                    'unlock_topic' => __('Unlock Topic', 'bbpress-support-toolkit'),
+                    'lock_topic' => __('Lock Topic', 'bbpress-support-toolkit'),
+                    'topic_locked_success' => __('Topic locked successfully', 'bbpress-support-toolkit'),
+                    'topic_unlocked_success' => __('Topic unlocked successfully', 'bbpress-support-toolkit'),
+                    'error_locking_topic' => __('Error locking topic', 'bbpress-support-toolkit'),
+                    'error_unlocking_topic' => __('Error unlocking topic', 'bbpress-support-toolkit'),
+                    'ajax_error' => __('AJAX error occurred', 'bbpress-support-toolkit'),
+                    'enter_note' => __('Please enter a note', 'bbpress-support-toolkit'),
+                    'note_saved' => __('Note saved successfully', 'bbpress-support-toolkit'),
+                    'error_saving_note' => __('Error saving note', 'bbpress-support-toolkit'),
+                    'post_id_not_found' => __('Post ID not found', 'bbpress-support-toolkit'),
+                    'enter_report_reason' => __('Please enter the reason for reporting this content:', 'bbpress-support-toolkit'),
+                    'reported' => __('Reported', 'bbpress-support-toolkit'),
+                    'content_reported' => __('Content reported successfully', 'bbpress-support-toolkit'),
+                    'error_reporting' => __('Error reporting content', 'bbpress-support-toolkit')
+                ]
+            ]);
+        }
     }
 
     public function register_widgets()

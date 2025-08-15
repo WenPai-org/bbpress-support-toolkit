@@ -1,0 +1,286 @@
+/* Advanced Features Styles */
+
+/* Admin Notes */
+.bbps-admin-note {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 0;
+    color: #856404;
+    font-size: 14px;
+}
+
+.bbps-admin-note strong {
+    color: #664d03;
+}
+
+/* Live Preview */
+.bbps-preview-container {
+    margin: 10px 0;
+}
+
+#bbps-preview-content {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    background: #f9f9f9;
+    margin-top: 10px;
+}
+
+#bbps-preview-content h4 {
+    margin-top: 0;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* Mark as Read */
+.bbps-mark-read-container {
+    margin: 10px 0;
+    text-align: right;
+}
+
+.bbps-mark-read {
+    color: #0073aa;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.bbps-mark-read:hover {
+    color: #005177;
+    text-decoration: underline;
+}
+
+.bbps-topic-read {
+    opacity: 0.7;
+}
+
+.bbps-topic-read .bbp-topic-title {
+    font-weight: normal;
+}
+
+.bbps-topic-unread .bbp-topic-title {
+    font-weight: bold;
+}
+
+/* Report Content */
+.bbps-report-container {
+    margin: 10px 0;
+    text-align: right;
+}
+
+.bbps-report-content {
+    color: #d63384;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.bbps-report-content:hover {
+    color: #a02952;
+    text-decoration: underline;
+}
+
+/* Canned Replies */
+.bbps-canned-replies {
+    margin: 10px 0;
+    padding: 10px;
+    background: #f0f0f1;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+}
+
+.bbps-canned-replies h4 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #1d2327;
+}
+
+.bbps-canned-reply-item {
+    margin: 5px 0;
+    padding: 8px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.bbps-canned-reply-item:hover {
+    background: #f6f7f7;
+}
+
+.bbps-canned-reply-title {
+    font-weight: bold;
+    color: #1d2327;
+    margin-bottom: 3px;
+}
+
+.bbps-canned-reply-content {
+    color: #646970;
+    font-size: 13px;
+}
+
+/* Topic Lock */
+.bbps-topic-lock-warning {
+    background: #fcf8e3;
+    border: 1px solid #faebcc;
+    color: #8a6d3b;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+}
+
+.bbps-topic-lock-warning .dashicons {
+    margin-right: 5px;
+}
+
+/* General Styles */
+.bbps-feature-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.bbps-loading {
+    opacity: 0.6;
+}
+
+.bbps-success-message {
+    background: #d1edff;
+    border: 1px solid #0073aa;
+    color: #0073aa;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin: 10px 0;
+    font-size: 13px;
+}
+
+.bbps-error-message {
+    background: #ffeaea;
+    border: 1px solid #d63384;
+    color: #d63384;
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin: 10px 0;
+    font-size: 13px;
+}
+
+/* Canned Replies Styles */
+.bbps-canned-replies {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.bbps-canned-replies h4 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.bbps-canned-reply-item {
+    background: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: 3px;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.bbps-canned-reply-item:hover,
+.bbps-canned-reply-item.bbps-hover {
+    background: #f0f8ff;
+    border-color: #0073aa;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.bbps-canned-reply-item.bbps-inserted {
+    background: #d4edda;
+    border-color: #28a745;
+}
+
+.bbps-canned-reply-title {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+    font-size: 13px;
+}
+
+.bbps-canned-reply-content {
+    color: #666;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+/* Topic Lock Styles */
+.bbps-topic-lock-warning {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 4px;
+    padding: 12px 15px;
+    margin: 15px 0;
+    color: #856404;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.bbps-topic-lock-warning .dashicons {
+    margin-right: 8px;
+    color: #f39c12;
+    font-size: 18px;
+}
+
+.bbps-topic-lock-indicator {
+    position: fixed;
+    top: 32px;
+    right: 20px;
+    background: #e74c3c;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    z-index: 9999;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.bbps-topic-lock-indicator.active {
+    background: #27ae60;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .bbps-mark-read-container,
+    .bbps-report-container {
+        text-align: left;
+        margin: 5px 0;
+    }
+    
+    .bbps-canned-replies {
+        padding: 10px;
+    }
+    
+    .bbps-canned-reply-item {
+        padding: 8px;
+    }
+    
+    .bbps-topic-lock-warning {
+        padding: 10px;
+        font-size: 13px;
+    }
+    
+    .bbps-topic-lock-indicator {
+        right: 10px;
+        padding: 6px 10px;
+    }
+    
+    .bbps-admin-note {
+        padding: 8px;
+        font-size: 13px;
+    }
+}
